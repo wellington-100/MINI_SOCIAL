@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <meta charset="UTF-8">
+    <title>MINI SOCIAL</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+
+        }
+        .content-wrapper {
+            position: relative;
+            width: 80%;
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-top: 0vh; 
+        }
+        .logo-image {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+            margin-bottom: 30px; 
+        }
+
+        h1 {
+            color: black;
+            font-size: 24px;
+            margin: 20px 0;
+            style="margin-top: 30px;"
+        }
+        .error-messages {
+            color: red;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        form {
+            display: inline-block;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        form input {
+            display: block;
+            font-size: 16px;
+            width: 250px;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            color: black;
+            background-color: #fff;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+        form button {
+            display: block;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #C19A6B;
+            color: black;
+            margin: 20px auto;
+            cursor: pointer;
+            width: 230px;
+            font-weight: bold;
+        }
+        form button:hover {
+            background-color: #E6BF83;
+        }
+        .footer {
+            position: relative;
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+        p{
+            margin-bottom: 0px;"
+        }
+        .bold-link {
+            font-weight: bold;
+            text-decoration: none;  
+            color: inherit;  
+        }
+        .bold-link:hover {
+            text-decoration: underline;  
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <img class="logo-image" src="{% static 'logo-cover.png' %}" alt="MSM Logo" />
+        <h1>Sign Up</h1>
+        {% if messages %}
+        <div class="error-messages" style="margin-top: 20px;">
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    {{message}}
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form action="/user/signup-action/" method="POST" id="registerForm" style="margin-top: 0px;">
+            {% csrf_token %}
+            <input name="first_name" type="text" placeholder="First name..." style="margin-bottom: 20px;" required>
+            <input name="last_name" type="text" placeholder="Last name..." style="margin-bottom: 20px;" required>
+            <input name="email" type="email" placeholder="Email..." style="margin-bottom: 20px;" required>
+            <input name="password" type="password" placeholder="Password..." style="margin-bottom: 20px;" required>
+            <input name="confirm_password" type="password" placeholder="Confirm Password..." style="margin-bottom: 20px;" required>
+            <input type="checkbox" id="terms" required>
+            <label for="terms">Accept <a href="/user/terms_and_conditions" target="_blank" style="margin-bottom: 20px;" class="bold-link">Terms & Conditions </a></label> <br/>
+            <button type="submit">SIGN UP</button>
+            <p>Already have an account? <a href="/user/signin" class="bold-link">Sign In</a></p>
+        </form>
+        <p class="footer">{{ current_year }} &copy; MSM corp </p>
+    </div>
+
+</body>
+</html>

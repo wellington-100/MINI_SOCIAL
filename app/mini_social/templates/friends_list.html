@@ -1,0 +1,868 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <meta charset="UTF-8">
+    <title>MINI SOCIAL</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+            height: 100vh;
+            
+        }
+        .page-wrapper {
+            display: flex;
+            justify-content: center; /* Добавляем это свойство для центрирования дочерних элементов по горизонтали */
+            align-items: flex-start; /* Добавляем это свойство для позиционирования дочерних элементов в начале родительского элемента по вертикали */
+            height: 100vh;
+        }
+        .fixed-top-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+        }
+        .center-buttons a {
+            width: 150px;
+            box-sizing: border-box;
+        }
+        .center-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .center-buttons a:not(:last-child) {
+            margin-right: 20px;
+        }
+        .center-buttons .logout-link {
+            flex-grow: 1;
+            text-align: center;
+        }
+/* Fixed left block */
+        .fixed-left-wrapper {
+            position: fixed;
+            top: 70px; /* Это значение устанавливается на основе высоты вашего .fixed-top-wrapper */
+            left: 0;
+            bottom: 0;
+            width: 30%; /* Задайте ширину, которая вам подходит */
+            overflow-y: auto; /* Это позволит содержимому блока прокручиваться, если оно не умещается */
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .rounded-avatar {
+            width: 50px;
+            height: 50px;
+            margin-left: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .rounded-avatar img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        .menu-link {
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+            margin-bottom: 10px;
+            display: block;
+            padding: 5px 0;
+            margin: 10px;
+            margin-left: 30px;
+        }
+        .menu-link:hover {
+            background-color: #f5f5f5;
+        }
+/* Fixed left block */
+        .logout-link {
+            padding: 10px 20px;
+            background-color: #E6BF83;
+            color: black;
+            border-radius: 10px;
+            text-decoration: none;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            margin-right: 50px;
+        }
+        .logout-link:hover {
+            background-color: #E6BF83;
+            opacity: 0.8; /* Небольшое затемнение при наведении */
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        .profile-container img {
+            margin-right: 15px;
+        }
+        .content-wrapper { 
+            padding: 40px;
+            text-align: center;
+            margin-top: 70px;
+            width: 40%;
+            display: grid;
+            justify-items: center; /* Центрирует содержимое только по горизонтали */
+            align-items: start; /* Выравнивает содержимое по верхней части контейнера */
+            
+        }
+        .empty-right-wrapper {
+            position: fixed;
+            display: flex;
+            flex-direction: column; /* элементы будут располагаться вертикально */
+            top: 70px;
+            right: 0;
+            bottom: 0;
+            width: 30%; /* ширина фиксирована */
+            overflow-y: auto;
+            min-height: 500px; 
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            
+        }
+        
+
+        .logo-image {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+        }
+        .links-container {
+            margin: 20px 0;
+        }
+        .links-container a {
+            display: block;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #E6BF83;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 200px;
+            cursor: pointer;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            font-weight: bold;
+        }
+        .links-container a:hover {
+            background-color: #E6BF83;
+            opacity: 0.8; /* Небольшое затемнение при наведении */
+        }
+        .footer {
+            position: relative;
+            margin-top: 90px;
+            text-align: center;
+            color: #333;
+            
+        }
+        .post-action-btn {
+            width: 70px;
+            margin-left: 10px;
+        }
+        .author-info {
+            max-width: 150px;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+        .video-wrapper {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .video-wrapper iframe {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .no-style {
+            text-decoration: none; /* убирает подчеркивание */
+            color: black; /* устанавливает цвет текста в черный или любой другой цвет, который вы хотите */
+          }
+        
+        .friend-container {
+            display: flex;
+            justify-content: space-between; /* выравнивание содержимого между краями */
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            width: 100%; /* для занятия всей ширины родителя */
+            box-sizing: border-box;
+            
+
+        }
+
+        .friend-container img {
+            display: block;
+            max-width: 100%; /* чтобы изображение было отзывчивым и не выходило за пределы контейнера */
+            height: auto; /* чтобы сохранять пропорции изображения */
+        }
+        .friend-container a:hover {
+            background-color: #E6BF83;
+        }
+        /* Стили для текстовых элементов, чтобы они находились в одной строке */
+        .friend-container h4,
+        .friend-container p {
+            margin: 0;
+            white-space: nowrap; /* чтобы текст не переносился на новую строку */
+        }
+                /* Общий стиль для кнопок внутри форм */
+        .friend-request-form button {
+            font-size: 12px; /* Уменьшение размера текста в кнопках */
+            padding: 5px 10px; /* Установка внутренних отступов */
+            border: none; /* Убрать границу */
+            border-radius: 5px; /* Скругление углов */
+            cursor: pointer; /* Курсор в виде указателя */
+            transition: background-color 0.3s; /* Плавное изменение цвета фона */
+        }
+
+        /* Стиль для кнопки подтверждения */
+        .friend-request-form button[type="submit"]:first-of-type {
+            background-color: #E6BF83; /* Зеленый цвет фона */
+            color: black; /* Белый цвет текста */
+        }
+
+        /* Стиль для кнопки отклонения */
+        .friend-request-form button[type="submit"]:last-of-type {
+            background-color: #E6BF83; /* Красный цвет фона */
+            color: black; /* Белый цвет текста */
+        }
+
+        /* Стили для наведения */
+        .friend-request-form button[type="submit"]:hover {
+            opacity: 0.8; /* Небольшое затемнение при наведении */
+        }
+        /* Стили для выравнивания форм с кнопками вправо */
+        .friend-request-form {
+            display: flex; /* чтобы кнопки были в одной строке */
+            margin-left: auto; /* чтобы формы оттолкнулись вправо */
+        }
+        /*//////////////////////////  */
+        #chat-box {
+            width: 100%; /* Задайте нужную ширину */
+            float: right; /* Размещаем справа */
+            padding: 20px; /* Отступы внутри чата */
+            height: 500px; /* Вы можете настроить эту высоту по своему усмотрению */
+            overflow-y: auto; /* Включает прокрутку, если содержимое превышает максимальную высоту */
+            overflow-x: hidden;
+            padding: 0; /* Убираем внутренние отступы */
+            z-index: 100;
+            
+        }
+        
+        #chat-box h3 {
+            font-size: 18px;
+            color: #333; /* Цвет заголовка чата */
+            margin-bottom: 10px; /* Отступ снизу от заголовка */
+        }
+        
+        .chat-messages {
+            max-height: 200px; /* Максимальная высота блока сообщений, чтобы ограничить прокрутку */
+            overflow-y: auto; /* Включение вертикальной прокрутки при необходимости */
+        }
+        .chat-avatar {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px; /* Отступ справа от аватара */
+            margin-left: 10px; /* Отступ справа от аватара */
+            border-radius: 50%;
+            overflow: hidden;
+            display: inline-block;
+            flex-shrink: 0;
+            cursor: pointer;
+            position: relative; /* Устанавливаем контекст позиционирования */
+            vertical-align: top; /* Выравнивание по верхнему краю */
+        }
+        .message {
+            background-color: #f5f5f5; /* Цвет фона сообщения */
+            padding: 5px 10px; /* Отступы внутри сообщения */
+            margin: 5px 0; /* Отступы между сообщениями */
+            border-radius: 10px; /* Закругление углов сообщения */
+            position: relative; /* Устанавливаем контекст позиционирования */
+            display: inline-block;
+            max-width: 80%; /* Максимальная ширина сообщения */
+            
+            
+        }
+
+        .message-container {
+            display: flex;
+            margin-bottom: 10px; /* Отступ снизу для каждого блока сообщения */
+            width: 100%; /* Задаем полную ширину контейнера */
+            align-items: center
+            
+        }
+
+        #message-form {
+            display: flex; /* Используем flexbox для выравнивания элементов формы */
+            margin-top: 10px; /* Отступ сверху */
+           
+            
+        }
+        
+        #message-form button {
+            background-color: #E6BF83; /* Цвет фона кнопки */
+            color: black; /* Цвет текста кнопки */
+            border: none; /* Убрать границу кнопки */
+            padding: 10px 15px; /* Отступы внутри кнопки */
+            border-radius: 10px; /* Закругление углов кнопки */
+            cursor: pointer;
+            
+        }
+        
+        #message-form button:hover {
+            background-color: #E6BF83; /* Цвет фона кнопки при наведении */
+            opacity: 0.8; /* Небольшое затемнение при наведении */
+            
+        }
+        .message-sent {
+
+            flex-direction: row-reverse; /* Меняем порядок элементов: сначала текст, затем аватар */
+        }
+        .message-sent .chat-avatar {
+            display: inline-block; /* Отображаем аватар в отправленных сообщениях */
+            margin-left: 10px; /* Добавляем отступ слева от аватара */
+        }
+        
+        .message-received {
+            justify-content: flex-start; /* Выравнивание блока сообщения слева */
+            
+        }
+
+
+
+        /*//////////////////////////  */
+        .chat-header {
+            display: flex;
+            justify-content: flex-start;
+            position: sticky;
+            top: 0;
+            background-color: #f5f5f5;
+            color: black;
+            
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            width: 100%;
+            gap: 10px;
+            padding: 1px;
+            
+            align-items: center;
+            margin: 0; /* Убираем внешние отступы */
+            
+
+        }
+
+
+        .chat-header img {
+            margin: 0;
+            display: block;
+            max-width: 100%; /* чтобы изображение было отзывчивым и не выходило за пределы контейнера */
+            height: auto; /* чтобы сохранять пропорции изображения */
+        }
+        .chat-header a:hover {
+            
+            background-color: none;
+        }
+        /* Стили для содержимого заголовка чата */
+        .chat-header h3 {
+            margin: 0; /* Убираем внешние отступы */
+            font-size: 20px; /* Размер шрифта для заголовка */
+            color: white; /* Цвет текста */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="fixed-top-wrapper">
+            <div>
+                <img width="200" src="{% static 'logo-cover.png' %}"/>
+            </div>
+            <div class="center-buttons">
+                <a href="/user/profile/" class="logout-link" title="Home">Home</a>
+                <a href="/user/users_list/" class="logout-link" title="Find friends">Find friends</a>
+                <a href="/user/create_post/" class="logout-link" title="Create Post">Create post</a>
+            </div>
+            <div>
+                <a href="/user/logout" class="logout-link" title="Logout">Logout</a>
+            </div>
+        </div>
+
+        <!-- Fixed left block -->
+        <div class="fixed-left-wrapper">
+            <div class="profile-container">
+                <div class="rounded-avatar">
+                    <a href="{% url 'user_profile' user.id %}">
+                        <img src="{{ user.avatar.url }}" alt="User Avatar Avatar"/>
+                    </a>
+                </div>
+                <h4>
+                    <a href="{% url 'user_profile' user.id %} " class="no-style">
+                        {{ user.first_name }} {{ user.last_name }}
+                    </a>
+                </h4>
+            </div>
+            <a href="/user/friends/" class="menu-link" title="Logout"><i class="fa-solid fa-message fa-lg" style="color: #b17939;"></i>  Messages</a>
+            <a href="/user/my-posts" class="menu-link" title="My Posts"><i class="fa-solid fa-note-sticky fa-lg" style="color: #b17939;"></i> My Posts</a>
+            <a href="/user/friends_list" class="menu-link" title="Logout"><i class="fa-solid fa-user-group fa-lg" style="color: #b17939;"></i> Friends</a>
+            <a href="/user/message_list" class="menu-link" title="Logout"><i class="fa-solid fa-photo-film fa-lg" style="color: #b17939;"></i> Photos</a>
+            <a href="/user/about" class="menu-link" title="About"><i class="fa-solid fa-address-card fa-lg" style="color: #b17939;"></i> About</a>
+            <a href="/user/profile/edit" class="menu-link"><i class="fa-solid fa-user-pen fa-lg" style="color: #b17939;"></i> Edit Profile</a>
+        </div>
+        <!-- Fixed left block -->
+
+        <!-- friends_list.html -->
+        <div class="content-wrapper">
+            <div id="friend-list">
+                {% csrf_token %}
+                <hr style="min-width: 300px; margin-top: 20px;"/>
+
+                <h3>Friends</h3>
+                <hr/>
+                {% for friend in friends %}
+                    <div class="friend-container" id="friend_{{ friend.id }}" data-friend-avatar-url="{{ friend.avatar.url }}" style="padding: 10px; margin: 20px 0; background-color: #f5f5f5; border-radius: 15px;">
+                        <div class="rounded-avatar">
+                            <a href="{% url 'user_profile' friend.id %}">
+                                <img src="{{ friend.avatar.url }}" alt="Friend Avatar"/>
+                            </a>
+                        </div>
+                        <h4>
+                            <a href="{% url 'user_profile' friend.id %}" class="no-style">
+                                {{ friend.last_name }} {{ friend.first_name }}
+                            </a>
+                        </h4>
+                        <div class="friend-actions">
+                            <a href="{% url 'remove_friend' friend.id %}" class="btn btn-danger" data-friend-id="{{ friend.id }}" data-action="remove" >Unfriend</a>
+                            <a href="#" class="btn btn-primary message-btn" data-friend-id="{{ friend.id }}">Message</a>
+                            <input type="hidden" class="friend-profile-url" data-friend-id="{{ friend.id }}" value="{% url 'user_profile' friend.id %}">
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if not friends %}
+                    <br/>
+                    <h3 id="no-friend-msg"style="color: #837E7C;">You have no friends here yet!</h3>
+                {% endif %}
+            </div>
+        </div>
+        
+        
+        <div class="empty-right-wrapper" >
+            <div class="chat-box" id="chat-box">
+                <div class="search-results">
+                    <br/>
+                    <h3 style="text-align: center;">Friend Requests</h3>
+                    {% for request in requests %}
+                    <div class="friend-container" id="request-{{ request.id }}" 
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 10px; margin: 20px 0; background-color: #f5f5f5; border-radius: 15px; box-sizing: border-box;">
+                        <!-- Left-aligned block -->
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="rounded-avatar" style="margin-left: 2px;" >
+                                <img src="{{ request.creator.avatar.url }}" alt="User Avatar" style="display: block; max-width: 100%; height: auto;"/>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 13px; margin: 0;">{{request.creator.first_name}} {{request.creator.last_name}}</h4>
+    
+                            </div>
+                        </div>
+                        
+                        <!-- Right-aligned block -->
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <form class="friend-request-form" method="POST" action="{% url 'accept_friend_request' request.id %}" style="margin: 0;">
+                                {% csrf_token %}
+                                <button type="submit" style="font-size: 13px; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Confirm</button>
+                            </form>
+                            <form class="friend-request-form" method="POST" action="{% url 'reject_friend_request' request.id %}" style="margin: 0;">
+                                {% csrf_token %}
+                                <button type="submit" style="font-size: 13px; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <br/>
+                        <h3 style="color: #837E7C; text-align: center;">You have no friend requests</h3>
+                        
+                    {% endfor %}
+                </div>
+                {% if friend_id %}
+                <div class="chat-header" style="padding-left: 0; margin-left: 0;">
+                    <div class="message-container">
+                        {% for message in messages %}
+                            <div class="message-container">
+                                <img src="{{ message.sender.avatar.url }}" alt="Avatar" class="chat-avatar">
+                                <div class="message">
+                                    {{ message.body }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                {% endif %}
+            </div>
+            <form id="message-form" method="post" style="display: none;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="recipient_id" id="recipient_id" value="{{ friend_id }}">
+                <input class="message" type="text" name="message" id="message" placeholder="Aa" style="width: 60%;">
+                <button class="message" type="submit" style="width: 20%;">Send</button>
+            </form>
+            
+            <input type="hidden" id="current-user-avatar-url" value="{{ user.avatar.url }}">
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            // ////////////////     ФУНКЦИОНАЛ ДРУЗЕЙ - ЗАВПРОСОВ  /////////////////
+            $(document).on('click', '.btn-danger', function(event) {
+                console.log("Unfriend clicked"); // Для отладки
+                event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+            
+                var btn = $(this); // Ссылка, по которой кликнули
+                var friendId = btn.data('friend-id'); // Получаем ID друга
+                var csrftoken = $('[name="csrfmiddlewaretoken"]').val(); // CSRF token для безопасности запроса
+            
+                $.ajax({
+                    type: 'POST',
+                    url: btn.attr('href'), // URL для запроса на удаление друга
+                    headers: {'X-CSRFToken': csrftoken},
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#friend_' + friendId).remove(); // Удаляем элемент друга из списка
+                        } else {
+                            alert('Error: ' + response.message); // Показываем ошибку, если что-то пошло не так
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error: ' + xhr.responseText); // Показываем сообщение об ошибке
+                    }
+                });
+            });
+            // ////////////////
+
+            $(".friend-request-form").submit(function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var requestDiv = form.closest(".friend-container"); // Находим родительский div запроса
+                var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+            
+                $.ajax({
+                    headers: {
+                        "X-CSRFToken": csrftoken
+                    },
+                    type: "POST",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Плавное удаление блока запроса из списка
+                            requestDiv.fadeOut(300, function() { $(this).remove(); });
+                        } else {
+                            alert(response.message);  // Выводим сообщение об ошибке
+                        }
+                    },
+                    error: function() {
+                        alert('There was an error.');
+                    }
+                });
+            });
+            
+
+            // ////////////////
+
+            function addFriendToList(friendData) {
+                // Структура HTML для нового друга
+                var friendHtml = `
+                    <div class="friend-container" id="friend_${friendData.id}" style="padding: 10px; margin: 20px 0; background-color: #f5f5f5; border-radius: 15px;">
+                        <div class="rounded-avatar">
+                            <a href="/user_profile/${friendData.id}">
+                                <img src="${friendData.avatarUrl}" alt="Friend Avatar"/>
+                            </a>
+                        </div>
+                        <h4>
+                            <a href="/user_profile/${friendData.id}" class="no-style">
+                                ${friendData.lastName} ${friendData.firstName}
+                            </a>
+                        </h4>
+                        <div class="friend-actions">
+                            <a href="/remove-friend/${friendData.id}/" class="btn btn-danger" data-friend-id="${friendData.id}" data-action="remove">Unfriend</a>
+                            <a href="#" class="btn btn-primary message-btn" data-friend-id="${friendData.id}">Message</a>
+                            <input type="hidden" class="friend-profile-url" data-friend-id="${friendData.id}" value="/user_profile/${friendData.id}">
+                        </div>
+                    </div>`;
+            
+            
+                // Проверка наличия сообщения "You have no friends here yet!"
+                if ($('#no-friend-msg').length > 0) {
+                    // Если сообщение существует, удаляем его
+                    $('#no-friend-msg').remove();
+                }
+
+                // Добавляем нового друга в список
+                $('#friend-list').append(friendHtml);
+            }
+            
+
+            $(".friend-request-form").submit(function(event) {
+                event.preventDefault();
+                var form = $(this);
+                var requestDiv = form.closest(".friend-container"); // Находим родительский div запроса
+                var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+            
+                $.ajax({
+                    headers: {
+                        "X-CSRFToken": csrftoken
+                    },
+                    type: "POST",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log("Ответ сервера: ", response); // Для отладки
+                        if (response.status === 'success') {
+                            requestDiv.fadeOut(300, function() { $(this).remove(); });
+                            if (response.friendData) {
+                                addFriendToList(response.friendData); // Добавляем друга, если friendData существует
+                            } else {
+                                console.log("friendData отсутствует в ответе сервера");
+                                // Дополнительная обработка, если friendData отсутствует
+                            }
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    
+                    
+                    error: function(xhr, status, error) {
+                        console.log("Ошибка AJAX-запроса: ", error); // Отладка
+                    }
+                });
+            });
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // ////////////////     ФУНКЦИОНАЛ ЧАТА  /////////////////
+            // Ваш JavaScript код
+            var currentUserAvatarUrl = $('#current-user-avatar-url').val();
+            var isChatActive = false;
+
+            $(document).on('click', '.message-btn', function() {
+                console.log("Message clicked"); // Для отладки
+                var friendId = $(this).data('friend-id');
+                var friendName = $(this).closest('.friend-container').find('h4 a').text();
+                var friendProfileUrl = $('.friend-profile-url[data-friend-id="' + friendId + '"]').val();
+               
+                $('#recipient_id').val(friendId);
+                openChatWithFriend(friendId, friendName, friendProfileUrl);
+            });
+            
+            $('#message-form').submit(function(event) {
+                event.preventDefault(); // Предотвращаем стандартную отправку формы
+                var messageText = $('#message').val(); // Получаем текст сообщения из поля ввода
+                var recipientId = $('#recipient_id').val(); // Получаем ID получателя из скрытого поля формы
+        
+                // Мгновенно добавляем сообщение в чат
+                var messageHtml = '<div class="message-container message-sent">' +
+                    '<img src="' + currentUserAvatarUrl + '" alt="avatar" class="chat-avatar">' +
+                    '<div class="message">' + messageText + '</div>' +
+                    '</div>';
+            
+                $('#chat-box').append(messageHtml);
+                $('#message').val(''); // Очищаем поле ввода после отправки
+                $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight); // Прокрутка к последнему сообщению
+        
+                // Собираем данные для отправки
+                var formData = {
+                    'body': messageText,
+                    'recipient_id': recipientId,
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                };
+        
+                // Отправляем AJAX-запрос на сервер
+                $.ajax({
+                    type: 'POST',
+                    url: '/send_message/' + recipientId + '/',
+                    data: formData,
+                    success: function(response) {
+                        // Действия в случае успешной отправки сообщения
+                        if(!response.success) {
+                            // Обрабатываем ошибки валидации формы
+                            console.log("Errors:", response.errors);
+                            // Удаляем только что добавленное сообщение из DOM, если необходимо
+                            $(messageHtml).last().remove();
+                        }
+                    },
+                    // 6 seconds
+                    error: function(xhr, errmsg, err) {
+                        // Обработка ошибок при отправке AJAX-запроса
+                        console.error('Error:', errmsg);
+                    
+                        // Добавляем текст ошибки к сообщению
+                        var errorText = '<div class="error-message">Error sending message</div>';
+                        $(messageHtml).last().append(errorText);
+                    
+                        // Устанавливаем задержку перед удалением сообщения и текста ошибки
+                        setTimeout(function() {
+                            // Удаляем текст ошибки и сообщение из DOM
+                            $(messageHtml).last().find('.error-message').remove();
+                            $(messageHtml).last().remove();
+                        }, 4000); // 300000 миллисекунд = 5 минут
+                    }
+                });
+            });
+
+            function openChatWithFriend(friendId, friendName, friendProfileUrl) {
+                isChatActive = true;
+                var chatBox = $('#chat-box');
+                var messageForm = $('#message-form');
+                chatBox.empty(); // Очищаем чат
+            
+                // Загружаем данные о друге
+                $.ajax({
+                    type: 'GET',
+                    url: `/get_friend_data/${friendId}/`, // URL для получения данных о друге
+                    data: { friend_id: friendId },
+                    success: function(friendData) {
+                        // Создаем и добавляем заголовок чата с данными о друге
+                        var chatHeaderHtml = `<div class="chat-header" id="chatheader_${friendId}">
+                            <div class="rounded-avatar">
+                                <a href="${friendProfileUrl}">
+                                    <img src="${friendData.avatar_url}" alt="Friend Avatar"/>
+                                </a>
+                            </div>
+                            <h4>
+                                <a href="${friendProfileUrl}" class="no-style">
+                                    ${friendData.last_name} ${friendData.first_name}
+                                </a>
+                            </h4>
+                        </div>`;
+                        chatBox.append(chatHeaderHtml);
+                    },
+                });
+
+                // Загружаем сообщения
+                $.ajax({
+                    type: 'GET',
+                    url: '/load_messages/', // URL для загрузки сообщений
+                    data: { friend_id: friendId },
+                    success: function(messages) {
+                        // Отобразить сообщения в чате
+                        for (var i = 0; i < messages.length; i++) {
+                            var message = messages[i];
+                            var messageClass = message.is_sender ? 'message-sent' : 'message-received';
+                            var messageHtml = '<div class="message-container ' + messageClass + '">';
+                            messageHtml += '<img src="' + message.avatar_url + '" alt="avatar" class="chat-avatar">';
+                            messageHtml += '<div class="message">' + message.body + '</div></div>';
+                            chatBox.append(messageHtml);
+                        }
+                        chatBox.scrollTop(chatBox[0].scrollHeight); // Прокрутка к последнему сообщению
+                    },
+                });
+                messageForm.show(); // Показываем форму для отправки сообщений
+            }
+            
+            function fetchNewMessages() {
+                if (!isChatActive) {
+                    return; // Если чат не активен, прекращаем выполнение функции
+                }
+                var friendId = $('#recipient_id').val(); // ID текущего пользователя или чата
+            
+                // Отправляем AJAX-запрос на сервер для проверки новых сообщений
+                $.ajax({
+                    type: 'GET',
+                    url: '/check_new_messages/', // URL для проверки наличия новых сообщений
+                    data: { 'friend_id': friendId },
+                    success: function(response) {
+                        // Если есть новые сообщения, вызываем функцию load_messages
+                        if(response.new_messages) {
+                            loadMessages(friendId); // функция loadMessages должна быть определена в вашем коде
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error checking new messages:', status, error);
+                    }
+                });
+            }
+            
+            // Настраиваем short polling каждые 5 секунд
+            setInterval(fetchNewMessages, 5000);
+            
+
+            function loadMessages(friendId) {
+                // Отправляем AJAX-запрос на сервер для загрузки сообщений
+                $.ajax({
+                    type: 'GET',
+                    url: '/load_messages/', // Убедитесь, что URL соответствует вашим маршрутам в Django
+                    data: { 'friend_id': friendId },
+                    success: function(response) {
+                        // Очищаем текущее содержимое чата
+                        var chatBox = $('#chat-box');
+                        chatBox.find('.message-container').remove();
+                        // Вставляем каждое новое сообщение в чат
+                        response.forEach(function(message) {
+                            var messageClass = message.is_sender ? 'message-sent' : 'message-received';
+                            var messageHtml = '<div class="message-container ' + messageClass + '">' +
+                                '<img src="' + message.avatar_url + '" alt="avatar" class="chat-avatar">' +
+                                '<div class="message">' + message.body + '</div>' +
+                                '</div>';
+                        
+                            chatBox.append(messageHtml);
+                        });
+                        
+            
+                        // Прокрутка к последнему сообщению
+                        chatBox.scrollTop(chatBox[0].scrollHeight);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading messages:', status, error);
+                    }
+                });
+            }
+            
+
+        </script>
+          
+       
+    </body>
+    </html>
+    
+    

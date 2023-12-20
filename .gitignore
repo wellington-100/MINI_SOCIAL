@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and logs (Python/Django)
+*.log
+*.sqlite3
+*.pyc
+db.sqlite3
+
+# Django static and media files
+/static
+/media
+
+# Virtual environment
+venv/
+.env
+msenv/
+########
+# IDE specific files
+# Примеры для разных редакторов и сред разработки (раскомментируйте нужное):
+#.vscode/
+#.idea/
+#*.swp
+#*sublime-project
+#*sublime-workspace
+
+# Docker specific
+# Файлы и папки, создаваемые Docker и Docker Compose
+docker-compose*.yml
+.docker/
+Dockerfile
+# Если вы используете Docker Compose, исключите файлы с переменными окружения
+.env.db
+.env.django
+.env.redis
+
+# Node modules (если вы используете Node.js)
+node_modules/
+
+# Директории, создаваемые инструментами, такими как pytest
+htmlcov/
+.coverage
+.cache
+.pytest_cache/
+
+# Другие файлы и папки
+# Примеры:
+#celerybeat-schedule
+#*.pot
+#*.pyd
+#*.pyo
+#*.whl
+#Скрытые системные файлы
+.DS_Store
+Thumbs.db
+data/
+
+app/media/
+
+
+
+ 

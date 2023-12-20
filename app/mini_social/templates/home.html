@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <meta charset="UTF-8">
+    <title>MINI SOCIAL</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .content-wrapper {
+            position: relative;
+            width: 80%;
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 5vh;
+        }
+        .counter-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            color: #5C3317;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        .logo-image {
+            display: block;
+            margin: 0 auto;
+            width: 70%;
+        }
+        .links-container {
+            margin: 20px 0;
+        }
+        .links-container a {
+            display: block;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #C19A6B;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 200px;
+            cursor: pointer;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            font-weight: bold;
+        }
+        .links-container a:hover {
+            background-color: #E6BF83;
+        }
+        .footer {
+            position: relative;
+            margin-top: 90px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="content-wrapper">
+    <div class="counter-container">
+        <span class="counter-text">Your visits: </span>
+        <div class="counter">{{ visit_count }}</div>
+    </div>
+    <img class="logo-image" src="{% static 'cover.png' %}" alt="MSM Logo" />
+    <div class="links-container">
+        <a href="/user/signin">Sign In</a>
+        <a href="/user/signup">Sign Up</a>
+    </div>
+    <p class="footer">{{ current_year }} &copy; MSM corp </p>
+</div>
+{% if not banner_viewed %}
+    <header>
+        <h2>GET PRO ACCOUNT NOW!</h2>
+        <h3>DISCOUNT -30%</h3>
+    </header>
+{% endif %}
+
+</body>
+</html>

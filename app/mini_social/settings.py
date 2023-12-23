@@ -147,10 +147,9 @@ AUTHENTICATION_BACKENDS = [
     
 ]
 
-# settings.py
 
-REDIS_HOST = 'localhost'  # Используйте localhost для подключения к Docker
-REDIS_PORT = 6379         # Порт, на который проброшен Redis в Docker
+REDIS_HOST = 'localhost'  
+REDIS_PORT = 6379        
 
 
 

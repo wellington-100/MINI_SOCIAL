@@ -19,8 +19,8 @@
         }
         .page-wrapper {
             display: flex;
-            justify-content: center; /* Добавляем это свойство для центрирования дочерних элементов по горизонтали */
-            align-items: flex-start; /* Добавляем это свойство для позиционирования дочерних элементов в начале родительского элемента по вертикали */
+            justify-content: center; 
+            align-items: flex-start; 
             height: 100vh;
         }
         .fixed-top-wrapper {
@@ -57,11 +57,11 @@
 /* Fixed left block */
         .fixed-left-wrapper {
             position: fixed;
-            top: 70px; /* Это значение устанавливается на основе высоты вашего .fixed-top-wrapper */
+            top: 70px; 
             left: 0;
             bottom: 0;
-            width: 20%; /* Задайте ширину, которая вам подходит */
-            overflow-y: auto; /* Это позволит содержимому блока прокручиваться, если оно не умещается */
+            width: 20%; 
+            overflow-y: auto; 
         }
         .rounded-avatar {
             width: 50px;
@@ -114,9 +114,9 @@
             margin-right: 15px;
         }
         .content-wrapper {
-            position: absolute; /* Абсолютное позиционирование */
-            left: 50%; /* Центрирование блока относительно экрана */
-            transform: translateX(-50%); /* Дополнительное смещение для точного центрирования */
+            position: absolute; 
+            left: 50%; 
+            transform: translateX(-50%); 
             width: auto; 
             max-width: 750px; 
             padding: 40px;
@@ -277,11 +277,11 @@
                     dataType: 'json',
                     success: function(response) {
                         if($(form).find('button').text() === 'Send Request') {
-                            $(form).attr('action', $(form).attr('data-cancel-url')); // меняем URL на URL для отмены запроса
-                            $(form).find('button').text('Cancel request'); // меняем текст кнопки
+                            $(form).attr('action', $(form).attr('data-cancel-url')); 
+                            $(form).find('button').text('Cancel request'); 
                         } else {
-                            $(form).attr('action', $(form).attr('data-send-url')); // меняем URL обратно на URL для отправки запроса
-                            $(form).find('button').text('Send Request'); // меняем текст кнопки обратно на "Send Request"
+                            $(form).attr('action', $(form).attr('data-send-url')); 
+                            $(form).find('button').text('Send Request'); 
                         }
                     },
                     error: function() {

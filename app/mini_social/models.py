@@ -87,8 +87,7 @@ class Comment(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    is_edited = models.BooleanField(default=False)  # Новое поле
-
+    is_edited = models.BooleanField(default=False)  
     def __str__(self):
         return f"Comment by {self.author} on {self.post}"
 
@@ -102,7 +101,7 @@ class Comment(models.Model):
 
     def update_comment(self, new_text):
         self.text = new_text
-        self.is_edited = True  # Устанавливаем флаг в True при редактировании
+        self.is_edited = True 
         self.save()
 
     def like(self, user):
@@ -241,12 +240,10 @@ class Friendship(models.Model):
 
     @classmethod
     def get_friends_with_messages(cls, user):
-        # Получаем ID друзей, с которыми у пользователя есть сообщения
         friends_with_messages_ids = Message.objects.filter(
             models.Q(sender=user) | models.Q(recipient=user)
         ).values_list('sender', 'recipient')
 
-        # Преобразуем QuerySet в список ID
         friends_ids = set()
         for sender_id, recipient_id in friends_with_messages_ids:
             if sender_id != user.id:
@@ -254,11 +251,9 @@ class Friendship(models.Model):
             if recipient_id != user.id:
                 friends_ids.add(recipient_id)
 
-        # Получаем друзей пользователя, которые есть в списке friends_ids
         created_by_user = cls.objects.filter(creator=user, status='accepted', friend__id__in=friends_ids).values_list('friend', flat=True)
         friend_of_user = cls.objects.filter(friend=user, status='accepted', creator__id__in=friends_ids).values_list('creator', flat=True)
 
-        # Объединяем ID и возвращаем пользователей
         friends_ids = list(created_by_user) + list(friend_of_user)
         return CustomUser.objects.filter(id__in=friends_ids)
 
@@ -291,7 +286,7 @@ class Message(models.Model):
         return f"From {self.sender} to {self.recipient} at {self.timestamp}"
 
     def get_sender_avatar_url(self):
-        return self.sender.profile.avatar.url  # предполагая, что у модели пользователя есть связанный профиль с аватаром
+        return self.sender.profile.avatar.url
     
 
 

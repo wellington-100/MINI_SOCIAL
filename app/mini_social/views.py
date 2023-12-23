@@ -9,7 +9,6 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import *
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 from django.contrib.auth.decorators import login_required, permission_required
-
 from .forms import *
 from django.contrib import messages
 from django.db.models import Q
@@ -21,11 +20,6 @@ from django.utils import timezone
 from time import time
 from datetime import datetime, timedelta
 import redis
-
-
-
-
-
 
 
 
@@ -72,7 +66,6 @@ def signin_action(request):
     input_password = request.GET['password']
     user = authenticate(request, email=input_email, password=input_password, backend='mini_social.backends.EmailBackend')
     
-    
     if user is not None:
         login(request, user)
         user = CustomUser.objects.get(pk=request.user.id)
@@ -85,7 +78,6 @@ def signin_action(request):
 
 @require_POST
 def signup_action(request):
-    # Теперь мы обрабатываем данные из POST запроса
     input_first_name = request.POST['first_name']
     input_last_name = request.POST['last_name']
     input_email = request.POST['email']
@@ -95,7 +87,7 @@ def signup_action(request):
         c_user = CustomUser.objects.create_user(
             first_name=input_first_name,
             last_name=input_last_name,
-            username=input_email,  # Используем email в качестве username
+            username=input_email,  
             email=input_email,
             password=input_password
         ) 
@@ -125,13 +117,8 @@ def profile_save_action(request):
     if input_password:
         user.set_password(input_password)
     if input_file_avatar:
-        # Генерируем уникальное имя для файла
         avatar_des_name = f"avatars/avatar{randint(1000000, 9000000)}-{int(time())}.png"
-        
-        # Сохраняем файл в default_storage, который настроен на использование MEDIA_ROOT
         path = default_storage.save(avatar_des_name, ContentFile(input_file_avatar.read()))
-        
-        # Если у вас есть поле avatar в модели CustomUser, сохраните ссылку на файл
         user.avatar = path
     if input_birth_date:
         try:
@@ -250,24 +237,17 @@ def my_posts_page(request):
     else:
         return redirect ("/user/signin")
 #############################################################################   
-@login_required  # Декоратор, который обеспечивает доступ только аутентифицированным пользователям.
+@login_required  
 def user_posts_page(request, user_id):
-    # Используем функцию get_object_or_404 для получения объекта пользователя по его user_id.
-
     user = get_object_or_404(CustomUser, pk=user_id)
     current_user = CustomUser.objects.get(pk=request.user.id)
-    # Получаем последние 10 постов данного пользователя, сортируя их по времени в обратном порядке.
     posts = Post.objects.filter(author=user).order_by('-time')[:10]
-    
-    # Загружаем шаблон 'user-profile.html'.
     template = loader.get_template('user-profile.html')
-    
-    # Возвращаем HTTP-ответ с отрендеренным шаблоном и контекстом данных.
     return HttpResponse(template.render(request=request, context={
-        'user': user,  # Передаем объект пользователя в контекст.
+        'user': user,  
         'current_user': current_user,
-        'posts': posts,  # Передаем список постов пользователя в контекст.
-        'current_year': datetime.now().year,  # Передаем текущий год в контекст.
+        'posts': posts,  
+        'current_year': datetime.now().year,  
     }))
 
 
@@ -275,18 +255,13 @@ def user_posts_page(request, user_id):
 def hide_post(request, post_id):
     current_user = CustomUser.objects.get(pk=request.user.id)
     post = get_object_or_404(Post, id=post_id)
-    # Поиск следующего поста для перенаправления после скрытия текущего
     next_post = Post.objects.filter(id__gt=post_id).first()
-    # Проверяем, что текущий пользователь не является автором поста
     if post.author != current_user:
-        # Создаем запись о скрытом посте, если текущий пользователь не является автором
         HiddenPost.objects.get_or_create(user=current_user, post=post)
         if next_post:
             return redirect(f'/user/profile#post-{next_post.id}')
         else:
             return redirect('/user/profile')
-    
-    # Если пользователь пытается скрыть свой собственный пост или другая ошибка
     return redirect('/user/profile')
 
 
@@ -343,12 +318,9 @@ def send_friend_request(request, user_id):
 @login_required
 def cancel_friend_request(request, user_id):
     to_user = get_object_or_404(CustomUser, id=user_id)
-    
-    # Находим запись о запросе в дружбу
     friendship_request = Friendship.objects.filter(creator=request.user, friend=to_user, status='sent').first()
-    
     if friendship_request:
-        friendship_request.delete()  # Удаление записи
+        friendship_request.delete()  
         return JsonResponse({'message': 'Request cancelled successfully.'})
     else:
         return JsonResponse({'message': 'Friend request not found or already processed.'}, status=404)
@@ -363,7 +335,7 @@ def accept_friend_request(request, friendship_id):
                 'id': friend.id,
                 'firstName': friend.first_name,
                 'lastName': friend.last_name,
-                'avatarUrl': friend.avatar.url  # Пример, адаптируйте под вашу модель
+                'avatarUrl': friend.avatar.url  
             }
             return JsonResponse({'status': 'success', 'message': 'Friend request accepted.', 'friendData': friend_data})
     return JsonResponse({'status': 'error', 'message': 'Unable to accept friend request.'}, status=400)
@@ -373,7 +345,7 @@ def accept_friend_request(request, friendship_id):
 def reject_friend_request(request, friendship_id):
     friendship = get_object_or_404(Friendship, id=friendship_id)
     if friendship.friend.email == request.user.email:
-        friendship.delete()  # Удаление записи
+        friendship.delete() 
         return JsonResponse({'status': 'success', 'message': 'Friend request rejected.'})
     return JsonResponse({'status': 'error', 'message': 'Unable to reject friend request.'}, status=400)
 
@@ -392,7 +364,6 @@ def remove_friend(request, user_id):
     except CustomUser.DoesNotExist:
         return JsonResponse({'status': 'error', 'message': 'User not found.'}, status=404)
     except Exception as e:
-        # Логирование ошибки для отладки
         print(f"Error removing friend: {e}")
         return JsonResponse({'status': 'error', 'message': 'Internal server error.'}, status=500)
 
@@ -407,9 +378,7 @@ def mutual_friends(request, user_id):
 def friends_page(request):
     user = CustomUser.objects.get(pk=request.user.id)
     template = loader.get_template('friends_list.html')
-    # Получение запросов в друзья
     received_requests = Friendship.objects.filter(friend=user, status='sent')
-    # Получение списка друзей
     friends = Friendship.get_friends(user)
     return HttpResponse(template.render(request=request, context={
         'user': user,
@@ -426,25 +395,20 @@ def send_message(request, friend_id):
     
     if form.is_valid():
         try:
-            # Получаем экземпляр CustomUser для текущего пользователя
             user = CustomUser.objects.get(pk=request.user.id)
-            # Проверяем, существует ли пользователь с friend_id
             friend = CustomUser.objects.get(pk=friend_id)
-            
             message = form.save(commit=False)
-            message.sender = user  # Используем экземпляр CustomUser
-            message.recipient = friend  # Используем экземпляр CustomUser для получателя
+            message.sender = user  
+            message.recipient = friend  
             message.save()
             
             return JsonResponse({'success': True})
-        except Exception as e:  # Добавлена обработка исключений при сохранении
-            
+        except Exception as e:  
             return JsonResponse({'success': False, 'errors': str(e)})
     else:
         
         return JsonResponse({'success': False, 'errors': form.errors})
 
-# Здесь вы должны вставить свои импорты и любой другой необходимый код.
 
 ####################################
 
@@ -459,7 +423,7 @@ def message_list(request):
     })
 
 #########################
-# views.py
+
 
 def chat_view(request, friend_id):
     if request.method == "POST":
@@ -487,13 +451,11 @@ def friends_and_chat(request, friend_id=None):
     try:
         user = CustomUser.objects.get(pk=request.user.id)
     except CustomUser.DoesNotExist:
-        # Обработка случая, когда пользователь не найден
         return HttpResponseNotFound('User not found')
 
     template = loader.get_template('friends_and_chat.html')
     received_requests = Friendship.objects.filter(friend=user, status='sent')
 
-    # Предполагаем, что у вас есть метод get_friends_with_messages
     friends_ids_with_messages = Friendship.get_friends_with_messages(user)
     friends_with_messages = CustomUser.objects.filter(
         Q(sent_messages__recipient=user) | Q(received_messages__sender=user),
@@ -516,7 +478,6 @@ def friends_and_chat(request, friend_id=None):
                 (Q(sender=user, recipient=friend) | Q(sender=friend, recipient=user))
             ).order_by('timestamp')
 
-            # Форматируем время и дату для каждого сообщения
             for message in messages:
                 message.formatted_time = message.timestamp.strftime("%H:%M")
                 message.formatted_date = message.timestamp.date()
@@ -534,7 +495,6 @@ def friends_and_chat(request, friend_id=None):
         'messages': messages,
         'form': form,
         'friends': sorted_friends,
-        # 'is_online': is_online  # Добавление информации о статусе онлайн
     }))
 
 
@@ -544,20 +504,16 @@ def friends_and_chat(request, friend_id=None):
 def load_messages(request):
     if request.method == 'GET':
         friend_id = request.GET.get('friend_id')
-
         if friend_id:
             user = CustomUser.objects.get(pk=request.user.id)
             friend = CustomUser.objects.get(pk=friend_id)
-
             messages = Message.objects.filter(
                 (Q(sender=user, recipient=friend) | Q(sender=friend, recipient=user)),
-                is_deleted=False  # Исключаем сообщения с флагом is_deleted = True
+                is_deleted=False  
             ).order_by('timestamp')
 
-            # Если есть сообщения, обновляем время в сессии
             if messages:
                 last_message_time = messages.last().timestamp
-                # Убедитесь, что last_message_time является aware datetime
                 if timezone.is_naive(last_message_time):
                     last_message_time = timezone.make_aware(last_message_time, timezone.get_default_timezone())
                 request.session['last_message_time'] = last_message_time.isoformat()
@@ -570,15 +526,14 @@ def load_messages(request):
                     'body': message.body,
                     'avatar_url': message.sender.avatar.url if message.sender.avatar else settings.MEDIA_URL + 'avatars/default.png',
                     'is_sender': message.sender == user,
-                    'timestamp': message.timestamp.isoformat(),  # Форматируем время каждого сообщения
-                    'date': message.timestamp.strftime("%e %B %Y")  # Форматируем дату в формате "23 November 2023"
+                    'timestamp': message.timestamp.isoformat(),  
+                    'date': message.timestamp.strftime("%e %B %Y")  
                     
                 }
                 for message in messages
             ]
             return JsonResponse(messages_data, safe=False)
 
-        # Если сообщений нет, отправляем пустой список
         return JsonResponse([], safe=False)
 
 redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=0)
@@ -586,8 +541,6 @@ redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, d
 def check_messages_updates(request):
     user = request.user
     friend_id = request.GET.get('friend_id', None)
-    # print(f"Received request for user {user.id} and friend {friend_id}")
-
     redis_key_last_check = f'user:{user.id}:friend:{friend_id}:last_check' if friend_id else None
 
     if request.method == 'GET' and friend_id:
@@ -610,7 +563,6 @@ def check_messages_updates(request):
                 timestamp__gt=last_check
             ).exists()
             # print(f'new_messages_exist: {new_messages_exist}')
-            # Проверка удаленных сообщений
             redis_key_deleted = f'user:{user.id}:deleted_message_count'
             current_deleted_message_count = Message.objects.filter(
                 (Q(sender=user, recipient=friend) | Q(sender=friend, recipient=user)),
@@ -619,8 +571,6 @@ def check_messages_updates(request):
             last_deleted_message_count = int(redis_client.get(redis_key_deleted) or 0)
             deleted_messages_changed = current_deleted_message_count != last_deleted_message_count
             # print(f'deleted_messages_changed: {deleted_messages_changed}')
-
-            # Проверка отредактированных сообщений
             redis_key_edited = f'user:{user.id}:edited_message_count'
             current_edited_message_count = Message.objects.filter(
                 (Q(sender=user, recipient=friend) | Q(sender=friend, recipient=user)),
@@ -629,17 +579,14 @@ def check_messages_updates(request):
             last_edited_message_count = int(redis_client.get(redis_key_edited) or 0)
             edited_messages_changed = current_edited_message_count != last_edited_message_count
             # print(f'edited_messages_changed: {edited_messages_changed}')
-
-            # Обновление значений в Redis
             if deleted_messages_changed:
                 redis_client.set(redis_key_deleted, current_deleted_message_count)
             if edited_messages_changed:
                 redis_client.set(redis_key_edited, current_edited_message_count)
 
-            # Возвращаем True, если есть какие-либо изменения
             if new_messages_exist or deleted_messages_changed or edited_messages_changed:
                 redis_client.set(redis_key_last_check, current_time.isoformat())
-                # print(f"Updated last check in Redis: {current_time.isoformat()}")  # Отслеживание обновления в Redis
+                # print(f"Updated last check in Redis: {current_time.isoformat()}")
                 return JsonResponse({'updates': True})
             
             return JsonResponse({'updates': False})
@@ -684,15 +631,13 @@ def get_friend_data(request, friend_id):
     return JsonResponse(data)
 
 
-##########################@login_required
+##########################
 
 @login_required
 def edit_message(request, message_id):
     try:
-        user = CustomUser.objects.get(pk=request.user.id)  # Получение текущего пользователя
-        message = Message.objects.get(pk=message_id)  # Получение сообщения по ID
-
-        # Проверка, является ли текущий пользователь отправителем сообщения
+        user = CustomUser.objects.get(pk=request.user.id) 
+        message = Message.objects.get(pk=message_id) 
         if message.sender != user:
             return JsonResponse({'success': False, 'error': 'You do not have permission to edit this message.'}, status=403)
 
@@ -702,7 +647,7 @@ def edit_message(request, message_id):
                 form.save()
                 message.last_edited_time = timezone.now()
                 message.is_edited = True
-                message.save()  # Сохранение изменений в объекте
+                message.save()  
 
                 return JsonResponse({'success': True, 'body': message.body})
             else:
@@ -726,7 +671,7 @@ def delete_message(request, message_id):
             return JsonResponse({'success': False, 'error': 'You do not have permission to delete this message.'}, status=403)
         message.last_deleted_time = timezone.now()
         message.is_deleted = True
-        message.save()  # Сохранение изменений в объекте
+        message.save() 
         return JsonResponse({'success': True})
 
     except Message.DoesNotExist:
@@ -757,11 +702,9 @@ def check_friend_authentication(request):
 
     friend = get_object_or_404(CustomUser, pk=friend_id)
 
-    # Проверяем, является ли пользователь другом текущего пользователя
     if friend not in request.user.friends.all():
         return JsonResponse({'status': 'error', 'message': 'User is not a friend'}, status=403)
 
-    # Проверяем, аутентифицирован ли друг (предполагаем, что у вас есть такой механизм)
     is_authenticated = friend.is_authenticated if hasattr(friend, 'is_authenticated') else False
 
     return JsonResponse({'is_authenticated': is_authenticated})
@@ -776,7 +719,7 @@ import json
 def create_comment(request, post_id):
     if request.method == "POST":
         try:
-            data = json.loads(request.body)  # Загружаем JSON-данные из тела запроса
+            data = json.loads(request.body)  
             text = data['text']
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
@@ -784,7 +727,7 @@ def create_comment(request, post_id):
         current_user = CustomUser.objects.get(pk=request.user.id)
         post = get_object_or_404(Post, id=post_id)
 
-        if text:  # Убедитесь, что текст не пустой
+        if text:  
             comment = Comment.create_comment(user=current_user, post=post, text=text)
             comment_data = {
                 'id': comment.id,
@@ -795,9 +738,9 @@ def create_comment(request, post_id):
                 'timestamp': comment.created_at.isoformat(),
                 'can_edit': current_user == comment.author,
                 'can_delete': current_user == comment.author or current_user == post.author,
-                'likes_count': 0,  # Новый комментарий не имеет лайков
-                'is_liked': False, # Текущий пользователь не мог поставить лайк
-                'likers_info': comment.get_likers_info(),  # Добавляем информацию о пользователях, поставивших лайки
+                'likes_count': 0,  
+                'is_liked': False, 
+                'likers_info': comment.get_likers_info(), 
             }
             return JsonResponse({'success': True, 'comment': comment_data})
         else:
@@ -838,7 +781,6 @@ def edit_comment(request, comment_id, post_id):
 
     comment.update_comment(new_text=new_text)
 
-    # Возвращаем обновленные данные комментария
     comment_data = {
         'id': comment.id,
         'author_last_name': comment.author.last_name,
@@ -847,8 +789,8 @@ def edit_comment(request, comment_id, post_id):
         'avatar_url': comment.author.avatar.url if comment.author.avatar else None,
         'timestamp': comment.created_at.isoformat(),
         'can_edit': current_user == comment.author,
-        'can_delete': current_user == comment.author or current_user == post.author,  # Вам нужно получить post
-        'is_edited': comment.is_edited,  # Добавляем информацию о редактировании
+        'can_delete': current_user == comment.author or current_user == post.author,  
+        'is_edited': comment.is_edited,  
         'likes_count': comment.get_likes_count(),
         'is_liked': comment.likes.filter(user=current_user).exists(),
     }
@@ -862,14 +804,10 @@ def load_comments(request):
     if request.method == 'GET':
         current_user = CustomUser.objects.get(pk=request.user.id)
         post_id = request.GET.get('post_id')
-
         if post_id:
             post = Post.objects.get(pk=post_id)
-            
             comments = Comment.objects.filter(
                 post=post,
-                # Убедитесь, что у модели Comment есть флаг для исключения удаленных комментариев, если это необходимо
-                # is_deleted=False
             ).order_by('created_at')
 
             comments_data = [
@@ -879,24 +817,19 @@ def load_comments(request):
                     'author_first_name': comment.author.first_name,
                     'text': comment.text,
                     'avatar_url': comment.author.avatar.url if comment.author.avatar else settings.MEDIA_URL + 'avatars/default.png',
-                    'timestamp': comment.created_at.isoformat(),  # Форматируем время каждого комментария
+                    'timestamp': comment.created_at.isoformat(),  
                     'can_edit': current_user == comment.author,
                     'can_delete': current_user == comment.author or current_user == post.author,
-                    'is_edited': comment.is_edited,  # Добавляем информацию о редактировании
+                    'is_edited': comment.is_edited,  
                     'likes_count': comment.get_likes_count(),
                     'is_liked': comment.likes.filter(user=current_user).exists(),
-                    'likers_info': comment.get_likers_info(),  # Добавляем информацию о пользователях, поставивших лайки
+                    'likers_info': comment.get_likers_info(),  
                     
                 }
                 for comment in comments
             ]
             return JsonResponse(comments_data, safe=False)
-
-        # Если комментариев нет, отправляем пустой список
         return JsonResponse([], safe=False)
-
-
-
 
 @login_required
 @require_POST
@@ -906,14 +839,12 @@ def add_like(request, comment_id):
         comment = Comment.objects.get(id=comment_id)
     except Comment.DoesNotExist:
         return JsonResponse({'error': 'Comment not found'}, status=404)
-
     
     comment.like(current_user)
-  # Здесь возможно возникновение ошибки
     return JsonResponse({
         'status': 'success', 
         'likes_count': comment.get_likes_count(),
-        'likers_info': comment.get_likers_info(),  # Добавляем информацию о пользователях, поставивших лайки
+        'likers_info': comment.get_likers_info(),  
         'is_liked': True
     })
 
@@ -931,7 +862,7 @@ def remove_like(request, comment_id):
     return JsonResponse({
         'status': 'success', 
         'likes_count': comment.get_likes_count(),
-        'likers_info': comment.get_likers_info(),  # Добавляем информацию о пользователях, поставивших лайки
+        'likers_info': comment.get_likers_info(),  
         'is_liked': False
     })
 
@@ -944,15 +875,12 @@ def add_post_like(request, post_id):
         post = get_object_or_404(Post, id=post_id)
     except Post.DoesNotExist:
         return JsonResponse({'error': 'Post not found'}, status=404)
-
-    
     post.like(current_user)
-  # Здесь возможно возникновение ошибки
     return JsonResponse({
         'id': post.id,
         'status': 'success', 
         'likes_count': post.get_likes_count(),
-        'likers_info': post.get_likers_info(),  # Добавляем информацию о пользователях, поставивших лайки
+        'likers_info': post.get_likers_info(),  
         'is_liked': True
     })
 
@@ -971,7 +899,7 @@ def remove_post_like(request, post_id):
         'id': post.id,
         'status': 'success', 
         'likes_count': post.get_likes_count(),
-        'likers_info': post.get_likers_info(),  # Добавляем информацию о пользователях, поставивших лайки
+        'likers_info': post.get_likers_info(), 
         'is_liked': False
     })
 
@@ -980,11 +908,8 @@ def profile_page(request):
     if request.user.is_authenticated:
         user = CustomUser.objects.get(pk=request.user.id)
         hidden_posts_ids = HiddenPost.objects.filter(user=user).values_list('post_id', flat=True)
-
-        # Исключаем скрытые посты из запроса
         posts_query = Post.objects.exclude(id__in=hidden_posts_ids).order_by('-time')[:20]
 
-        # Собираем данные для каждого поста
         posts_data = []
         for post in posts_query:
             post_data = {
@@ -1015,13 +940,12 @@ def profile_page(request):
 def get_likers(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
-        likers = post.likes.all() # предполагая, что у вас есть связь многие-ко-многим для лайков
+        likers = post.likes.all() 
 
         likers_info = [{
             'first_name': liker.user.first_name,
             'last_name': liker.user.last_name,
             'likes_count': post.get_likes_count(),
-            # Другие поля, которые вы хотите включить
         } for liker in likers]
 
         return JsonResponse({'likers': likers_info})

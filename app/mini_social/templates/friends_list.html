@@ -21,8 +21,8 @@
         }
         .page-wrapper {
             display: flex;
-            justify-content: center; /* Добавляем это свойство для центрирования дочерних элементов по горизонтали */
-            align-items: flex-start; /* Добавляем это свойство для позиционирования дочерних элементов в начале родительского элемента по вертикали */
+            justify-content: center; 
+            align-items: flex-start; 
             height: 100vh;
         }
         .fixed-top-wrapper {
@@ -59,11 +59,11 @@
 /* Fixed left block */
         .fixed-left-wrapper {
             position: fixed;
-            top: 70px; /* Это значение устанавливается на основе высоты вашего .fixed-top-wrapper */
+            top: 70px; 
             left: 0;
             bottom: 0;
-            width: 30%; /* Задайте ширину, которая вам подходит */
-            overflow-y: auto; /* Это позволит содержимому блока прокручиваться, если оно не умещается */
+            width: 30%; 
+            overflow-y: auto; 
             background-color: rgba(255, 255, 255, 0.9);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -108,7 +108,7 @@
         }
         .logout-link:hover {
             background-color: #E6BF83;
-            opacity: 0.8; /* Небольшое затемнение при наведении */
+            opacity: 0.8; 
         }
         .profile-container {
             display: flex;
@@ -125,28 +125,26 @@
             margin-top: 70px;
             width: 40%;
             display: grid;
-            justify-items: center; /* Центрирует содержимое только по горизонтали */
-            align-items: start; /* Выравнивает содержимое по верхней части контейнера */
+            justify-items: center; 
+            align-items: start; 
             
         }
         .empty-right-wrapper {
             position: fixed;
             display: flex;
-            flex-direction: column; /* элементы будут располагаться вертикально */
+            flex-direction: column; 
             top: 70px;
             right: 0;
             bottom: 0;
-            width: 30%; /* ширина фиксирована */
+            width: 30%; 
             overflow-y: auto;
             min-height: 500px; 
             background-color: rgba(255, 255, 255, 0.9);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
-            
         }
         
-
         .logo-image {
             display: block;
             margin: 0 auto;
@@ -172,7 +170,7 @@
         }
         .links-container a:hover {
             background-color: #E6BF83;
-            opacity: 0.8; /* Небольшое затемнение при наведении */
+            opacity: 0.8; 
         }
         .footer {
             position: relative;
@@ -200,161 +198,142 @@
             margin-right: auto;
         }
         .no-style {
-            text-decoration: none; /* убирает подчеркивание */
-            color: black; /* устанавливает цвет текста в черный или любой другой цвет, который вы хотите */
+            text-decoration: none; 
+            color: black; 
           }
         
         .friend-container {
             display: flex;
-            justify-content: space-between; /* выравнивание содержимого между краями */
+            justify-content: space-between; 
             align-items: center;
             gap: 10px;
             padding: 10px;
-            width: 100%; /* для занятия всей ширины родителя */
+            width: 100%; 
             box-sizing: border-box;
-            
-
         }
 
         .friend-container img {
             display: block;
-            max-width: 100%; /* чтобы изображение было отзывчивым и не выходило за пределы контейнера */
-            height: auto; /* чтобы сохранять пропорции изображения */
+            max-width: 100%; 
+            height: auto; 
         }
         .friend-container a:hover {
             background-color: #E6BF83;
         }
-        /* Стили для текстовых элементов, чтобы они находились в одной строке */
         .friend-container h4,
         .friend-container p {
             margin: 0;
-            white-space: nowrap; /* чтобы текст не переносился на новую строку */
+            white-space: nowrap; 
         }
-                /* Общий стиль для кнопок внутри форм */
         .friend-request-form button {
-            font-size: 12px; /* Уменьшение размера текста в кнопках */
-            padding: 5px 10px; /* Установка внутренних отступов */
-            border: none; /* Убрать границу */
-            border-radius: 5px; /* Скругление углов */
-            cursor: pointer; /* Курсор в виде указателя */
-            transition: background-color 0.3s; /* Плавное изменение цвета фона */
+            font-size: 12px; 
+            padding: 5px 10px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transition: background-color 0.3s; 
         }
 
-        /* Стиль для кнопки подтверждения */
         .friend-request-form button[type="submit"]:first-of-type {
-            background-color: #E6BF83; /* Зеленый цвет фона */
-            color: black; /* Белый цвет текста */
+            background-color: #E6BF83; 
+            color: black; 
         }
 
-        /* Стиль для кнопки отклонения */
         .friend-request-form button[type="submit"]:last-of-type {
-            background-color: #E6BF83; /* Красный цвет фона */
-            color: black; /* Белый цвет текста */
+            background-color: #E6BF83; 
+            color: black; 
         }
 
-        /* Стили для наведения */
         .friend-request-form button[type="submit"]:hover {
-            opacity: 0.8; /* Небольшое затемнение при наведении */
+            opacity: 0.8; 
         }
-        /* Стили для выравнивания форм с кнопками вправо */
+        
         .friend-request-form {
-            display: flex; /* чтобы кнопки были в одной строке */
-            margin-left: auto; /* чтобы формы оттолкнулись вправо */
+            display: flex; 
+            margin-left: auto; 
         }
-        /*//////////////////////////  */
+        
         #chat-box {
-            width: 100%; /* Задайте нужную ширину */
-            float: right; /* Размещаем справа */
-            padding: 20px; /* Отступы внутри чата */
-            height: 500px; /* Вы можете настроить эту высоту по своему усмотрению */
-            overflow-y: auto; /* Включает прокрутку, если содержимое превышает максимальную высоту */
+            width: 100%; 
+            float: right; 
+            padding: 20px; 
+            height: 500px; 
+            overflow-y: auto; 
             overflow-x: hidden;
-            padding: 0; /* Убираем внутренние отступы */
+            padding: 0; 
             z-index: 100;
-            
         }
         
         #chat-box h3 {
             font-size: 18px;
-            color: #333; /* Цвет заголовка чата */
-            margin-bottom: 10px; /* Отступ снизу от заголовка */
+            color: #333; 
+            margin-bottom: 10px; 
         }
         
         .chat-messages {
-            max-height: 200px; /* Максимальная высота блока сообщений, чтобы ограничить прокрутку */
-            overflow-y: auto; /* Включение вертикальной прокрутки при необходимости */
+            max-height: 200px; 
+            overflow-y: auto; 
         }
         .chat-avatar {
             width: 25px;
             height: 25px;
-            margin-right: 10px; /* Отступ справа от аватара */
-            margin-left: 10px; /* Отступ справа от аватара */
+            margin-right: 10px; 
+            margin-left: 10px; 
             border-radius: 50%;
             overflow: hidden;
             display: inline-block;
             flex-shrink: 0;
             cursor: pointer;
-            position: relative; /* Устанавливаем контекст позиционирования */
-            vertical-align: top; /* Выравнивание по верхнему краю */
+            position: relative; 
+            vertical-align: top; 
         }
         .message {
-            background-color: #f5f5f5; /* Цвет фона сообщения */
-            padding: 5px 10px; /* Отступы внутри сообщения */
-            margin: 5px 0; /* Отступы между сообщениями */
-            border-radius: 10px; /* Закругление углов сообщения */
-            position: relative; /* Устанавливаем контекст позиционирования */
+            background-color: #f5f5f5; 
+            padding: 5px 10px; 
+            margin: 5px 0; 
+            border-radius: 10px; 
+            position: relative; 
             display: inline-block;
-            max-width: 80%; /* Максимальная ширина сообщения */
-            
-            
+            max-width: 80%; 
         }
 
         .message-container {
             display: flex;
-            margin-bottom: 10px; /* Отступ снизу для каждого блока сообщения */
-            width: 100%; /* Задаем полную ширину контейнера */
+            margin-bottom: 10px; 
+            width: 100%; 
             align-items: center
-            
         }
 
         #message-form {
-            display: flex; /* Используем flexbox для выравнивания элементов формы */
-            margin-top: 10px; /* Отступ сверху */
-           
-            
+            display: flex; 
+            margin-top: 10px; 
         }
         
         #message-form button {
-            background-color: #E6BF83; /* Цвет фона кнопки */
-            color: black; /* Цвет текста кнопки */
-            border: none; /* Убрать границу кнопки */
-            padding: 10px 15px; /* Отступы внутри кнопки */
-            border-radius: 10px; /* Закругление углов кнопки */
+            background-color: #E6BF83; 
+            color: black; 
+            border: none;
+            padding: 10px 15px; 
+            border-radius: 10px; 
             cursor: pointer;
-            
         }
         
         #message-form button:hover {
-            background-color: #E6BF83; /* Цвет фона кнопки при наведении */
-            opacity: 0.8; /* Небольшое затемнение при наведении */
-            
+            background-color: #E6BF83; 
+            opacity: 0.8; 
         }
         .message-sent {
 
-            flex-direction: row-reverse; /* Меняем порядок элементов: сначала текст, затем аватар */
+            flex-direction: row-reverse; 
         }
         .message-sent .chat-avatar {
-            display: inline-block; /* Отображаем аватар в отправленных сообщениях */
-            margin-left: 10px; /* Добавляем отступ слева от аватара */
+            display: inline-block; 
+            margin-left: 10px; 
         }
         
         .message-received {
-            justify-content: flex-start; /* Выравнивание блока сообщения слева */
-            
+            justify-content: flex-start; 
         }
-
-
-
         /*//////////////////////////  */
         .chat-header {
             display: flex;
@@ -363,37 +342,31 @@
             top: 0;
             background-color: #f5f5f5;
             color: black;
-            
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 100;
             width: 100%;
             gap: 10px;
             padding: 1px;
-            
             align-items: center;
-            margin: 0; /* Убираем внешние отступы */
-            
-
+            margin: 0; 
         }
 
 
         .chat-header img {
             margin: 0;
             display: block;
-            max-width: 100%; /* чтобы изображение было отзывчивым и не выходило за пределы контейнера */
-            height: auto; /* чтобы сохранять пропорции изображения */
+            max-width: 100%; 
+            height: auto; 
         }
         .chat-header a:hover {
             
             background-color: none;
         }
-        /* Стили для содержимого заголовка чата */
         .chat-header h3 {
-            margin: 0; /* Убираем внешние отступы */
-            font-size: 20px; /* Размер шрифта для заголовка */
-            color: white; /* Цвет текста */
+            margin: 0; 
+            font-size: 20px; 
+            color: white; 
         }
-
 
     </style>
 </head>
@@ -539,27 +512,27 @@
         <script>
             // ////////////////     ФУНКЦИОНАЛ ДРУЗЕЙ - ЗАВПРОСОВ  /////////////////
             $(document).on('click', '.btn-danger', function(event) {
-                console.log("Unfriend clicked"); // Для отладки
-                event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+                console.log("Unfriend clicked"); 
+                event.preventDefault(); 
             
-                var btn = $(this); // Ссылка, по которой кликнули
-                var friendId = btn.data('friend-id'); // Получаем ID друга
-                var csrftoken = $('[name="csrfmiddlewaretoken"]').val(); // CSRF token для безопасности запроса
+                let btn = $(this); 
+                let friendId = btn.data('friend-id'); 
+                let csrftoken = $('[name="csrfmiddlewaretoken"]').val(); 
             
                 $.ajax({
                     type: 'POST',
-                    url: btn.attr('href'), // URL для запроса на удаление друга
+                    url: btn.attr('href'), 
                     headers: {'X-CSRFToken': csrftoken},
                     dataType: 'json',
                     success: function(response) {
                         if (response.status === 'success') {
-                            $('#friend_' + friendId).remove(); // Удаляем элемент друга из списка
+                            $('#friend_' + friendId).remove(); 
                         } else {
-                            alert('Error: ' + response.message); // Показываем ошибку, если что-то пошло не так
+                            alert('Error: ' + response.message); 
                         }
                     },
                     error: function(xhr, status, error) {
-                        alert('Error: ' + xhr.responseText); // Показываем сообщение об ошибке
+                        alert('Error: ' + xhr.responseText); 
                     }
                 });
             });
@@ -567,9 +540,9 @@
 
             $(".friend-request-form").submit(function(event) {
                 event.preventDefault();
-                var form = $(this);
-                var requestDiv = form.closest(".friend-container"); // Находим родительский div запроса
-                var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+                let form = $(this);
+                let requestDiv = form.closest(".friend-container"); 
+                let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
             
                 $.ajax({
                     headers: {
@@ -581,10 +554,9 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.status === 'success') {
-                            // Плавное удаление блока запроса из списка
                             requestDiv.fadeOut(300, function() { $(this).remove(); });
                         } else {
-                            alert(response.message);  // Выводим сообщение об ошибке
+                            alert(response.message);  
                         }
                     },
                     error: function() {
@@ -597,8 +569,7 @@
             // ////////////////
 
             function addFriendToList(friendData) {
-                // Структура HTML для нового друга
-                var friendHtml = `
+                let friendHtml = `
                     <div class="friend-container" id="friend_${friendData.id}" style="padding: 10px; margin: 20px 0; background-color: #f5f5f5; border-radius: 15px;">
                         <div class="rounded-avatar">
                             <a href="/user_profile/${friendData.id}">
@@ -617,23 +588,17 @@
                         </div>
                     </div>`;
             
-            
-                // Проверка наличия сообщения "You have no friends here yet!"
                 if ($('#no-friend-msg').length > 0) {
-                    // Если сообщение существует, удаляем его
                     $('#no-friend-msg').remove();
                 }
-
-                // Добавляем нового друга в список
                 $('#friend-list').append(friendHtml);
             }
             
-
             $(".friend-request-form").submit(function(event) {
                 event.preventDefault();
-                var form = $(this);
-                var requestDiv = form.closest(".friend-container"); // Находим родительский div запроса
-                var csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+                let form = $(this);
+                let requestDiv = form.closest(".friend-container"); 
+                let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
             
                 $.ajax({
                     headers: {
@@ -644,126 +609,93 @@
                     data: form.serialize(),
                     dataType: 'json',
                     success: function(response) {
-                        console.log("Ответ сервера: ", response); // Для отладки
+                        console.log("Ответ сервера: ", response); 
                         if (response.status === 'success') {
                             requestDiv.fadeOut(300, function() { $(this).remove(); });
                             if (response.friendData) {
-                                addFriendToList(response.friendData); // Добавляем друга, если friendData существует
+                                addFriendToList(response.friendData); с
                             } else {
                                 console.log("friendData отсутствует в ответе сервера");
-                                // Дополнительная обработка, если friendData отсутствует
                             }
                         } else {
                             alert(response.message);
                         }
                     },
                     
-                    
                     error: function(xhr, status, error) {
-                        console.log("Ошибка AJAX-запроса: ", error); // Отладка
+                        console.log("Ошибка AJAX-запроса: ", error);
                     }
                 });
             });
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             // ////////////////     ФУНКЦИОНАЛ ЧАТА  /////////////////
-            // Ваш JavaScript код
-            var currentUserAvatarUrl = $('#current-user-avatar-url').val();
-            var isChatActive = false;
+            let currentUserAvatarUrl = $('#current-user-avatar-url').val();
+            let isChatActive = false;
 
             $(document).on('click', '.message-btn', function() {
-                console.log("Message clicked"); // Для отладки
-                var friendId = $(this).data('friend-id');
-                var friendName = $(this).closest('.friend-container').find('h4 a').text();
-                var friendProfileUrl = $('.friend-profile-url[data-friend-id="' + friendId + '"]').val();
+                console.log("Message clicked"); 
+                let friendId = $(this).data('friend-id');
+                let friendName = $(this).closest('.friend-container').find('h4 a').text();
+                let friendProfileUrl = $('.friend-profile-url[data-friend-id="' + friendId + '"]').val();
                
                 $('#recipient_id').val(friendId);
                 openChatWithFriend(friendId, friendName, friendProfileUrl);
             });
             
             $('#message-form').submit(function(event) {
-                event.preventDefault(); // Предотвращаем стандартную отправку формы
-                var messageText = $('#message').val(); // Получаем текст сообщения из поля ввода
-                var recipientId = $('#recipient_id').val(); // Получаем ID получателя из скрытого поля формы
-        
-                // Мгновенно добавляем сообщение в чат
-                var messageHtml = '<div class="message-container message-sent">' +
+                event.preventDefault(); 
+                let messageText = $('#message').val(); 
+                let recipientId = $('#recipient_id').val(); 
+                let messageHtml = '<div class="message-container message-sent">' +
                     '<img src="' + currentUserAvatarUrl + '" alt="avatar" class="chat-avatar">' +
                     '<div class="message">' + messageText + '</div>' +
                     '</div>';
             
                 $('#chat-box').append(messageHtml);
-                $('#message').val(''); // Очищаем поле ввода после отправки
-                $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight); // Прокрутка к последнему сообщению
+                $('#message').val(''); 
+                $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
         
-                // Собираем данные для отправки
-                var formData = {
+                let formData = {
                     'body': messageText,
                     'recipient_id': recipientId,
                     'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                 };
         
-                // Отправляем AJAX-запрос на сервер
                 $.ajax({
                     type: 'POST',
                     url: '/send_message/' + recipientId + '/',
                     data: formData,
                     success: function(response) {
-                        // Действия в случае успешной отправки сообщения
                         if(!response.success) {
-                            // Обрабатываем ошибки валидации формы
                             console.log("Errors:", response.errors);
-                            // Удаляем только что добавленное сообщение из DOM, если необходимо
                             $(messageHtml).last().remove();
                         }
                     },
-                    // 6 seconds
                     error: function(xhr, errmsg, err) {
-                        // Обработка ошибок при отправке AJAX-запроса
                         console.error('Error:', errmsg);
-                    
-                        // Добавляем текст ошибки к сообщению
-                        var errorText = '<div class="error-message">Error sending message</div>';
+                        let errorText = '<div class="error-message">Error sending message</div>';
                         $(messageHtml).last().append(errorText);
                     
-                        // Устанавливаем задержку перед удалением сообщения и текста ошибки
                         setTimeout(function() {
-                            // Удаляем текст ошибки и сообщение из DOM
                             $(messageHtml).last().find('.error-message').remove();
                             $(messageHtml).last().remove();
-                        }, 4000); // 300000 миллисекунд = 5 минут
+                        }, 4000);
                     }
                 });
             });
 
             function openChatWithFriend(friendId, friendName, friendProfileUrl) {
                 isChatActive = true;
-                var chatBox = $('#chat-box');
-                var messageForm = $('#message-form');
-                chatBox.empty(); // Очищаем чат
+                let chatBox = $('#chat-box');
+                let messageForm = $('#message-form');
+                chatBox.empty(); 
             
-                // Загружаем данные о друге
                 $.ajax({
                     type: 'GET',
-                    url: `/get_friend_data/${friendId}/`, // URL для получения данных о друге
+                    url: `/get_friend_data/${friendId}/`, 
                     data: { friend_id: friendId },
                     success: function(friendData) {
-                        // Создаем и добавляем заголовок чата с данными о друге
-                        var chatHeaderHtml = `<div class="chat-header" id="chatheader_${friendId}">
+                        let chatHeaderHtml = `<div class="chat-header" id="chatheader_${friendId}">
                             <div class="rounded-avatar">
                                 <a href="${friendProfileUrl}">
                                     <img src="${friendData.avatar_url}" alt="Friend Avatar"/>
@@ -779,42 +711,37 @@
                     },
                 });
 
-                // Загружаем сообщения
                 $.ajax({
                     type: 'GET',
-                    url: '/load_messages/', // URL для загрузки сообщений
+                    url: '/load_messages/', 
                     data: { friend_id: friendId },
                     success: function(messages) {
-                        // Отобразить сообщения в чате
-                        for (var i = 0; i < messages.length; i++) {
-                            var message = messages[i];
-                            var messageClass = message.is_sender ? 'message-sent' : 'message-received';
-                            var messageHtml = '<div class="message-container ' + messageClass + '">';
+                        for (let i = 0; i < messages.length; i++) {
+                            let message = messages[i];
+                            let messageClass = message.is_sender ? 'message-sent' : 'message-received';
+                            let messageHtml = '<div class="message-container ' + messageClass + '">';
                             messageHtml += '<img src="' + message.avatar_url + '" alt="avatar" class="chat-avatar">';
                             messageHtml += '<div class="message">' + message.body + '</div></div>';
                             chatBox.append(messageHtml);
                         }
-                        chatBox.scrollTop(chatBox[0].scrollHeight); // Прокрутка к последнему сообщению
+                        chatBox.scrollTop(chatBox[0].scrollHeight); 
                     },
                 });
-                messageForm.show(); // Показываем форму для отправки сообщений
+                messageForm.show(); 
             }
             
             function fetchNewMessages() {
                 if (!isChatActive) {
-                    return; // Если чат не активен, прекращаем выполнение функции
+                    return; 
                 }
-                var friendId = $('#recipient_id').val(); // ID текущего пользователя или чата
-            
-                // Отправляем AJAX-запрос на сервер для проверки новых сообщений
+                let friendId = $('#recipient_id').val(); 
                 $.ajax({
                     type: 'GET',
-                    url: '/check_new_messages/', // URL для проверки наличия новых сообщений
+                    url: '/check_new_messages/', 
                     data: { 'friend_id': friendId },
                     success: function(response) {
-                        // Если есть новые сообщения, вызываем функцию load_messages
                         if(response.new_messages) {
-                            loadMessages(friendId); // функция loadMessages должна быть определена в вашем коде
+                            loadMessages(friendId); 
                         }
                     },
                     error: function(xhr, status, error) {
@@ -823,24 +750,20 @@
                 });
             }
             
-            // Настраиваем short polling каждые 5 секунд
             setInterval(fetchNewMessages, 5000);
             
 
             function loadMessages(friendId) {
-                // Отправляем AJAX-запрос на сервер для загрузки сообщений
                 $.ajax({
                     type: 'GET',
-                    url: '/load_messages/', // Убедитесь, что URL соответствует вашим маршрутам в Django
+                    url: '/load_messages/', 
                     data: { 'friend_id': friendId },
                     success: function(response) {
-                        // Очищаем текущее содержимое чата
-                        var chatBox = $('#chat-box');
+                        let chatBox = $('#chat-box');
                         chatBox.find('.message-container').remove();
-                        // Вставляем каждое новое сообщение в чат
                         response.forEach(function(message) {
-                            var messageClass = message.is_sender ? 'message-sent' : 'message-received';
-                            var messageHtml = '<div class="message-container ' + messageClass + '">' +
+                            let messageClass = message.is_sender ? 'message-sent' : 'message-received';
+                            let messageHtml = '<div class="message-container ' + messageClass + '">' +
                                 '<img src="' + message.avatar_url + '" alt="avatar" class="chat-avatar">' +
                                 '<div class="message">' + message.body + '</div>' +
                                 '</div>';
@@ -848,8 +771,6 @@
                             chatBox.append(messageHtml);
                         });
                         
-            
-                        // Прокрутка к последнему сообщению
                         chatBox.scrollTop(chatBox[0].scrollHeight);
                     },
                     error: function(xhr, status, error) {
@@ -858,9 +779,7 @@
                 });
             }
             
-
-        </script>
-          
+        </script>  
        
     </body>
     </html>

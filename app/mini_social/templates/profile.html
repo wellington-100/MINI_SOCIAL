@@ -20,8 +20,8 @@
         }
         .page-wrapper {
             display: flex;
-            justify-content: center; /* Добавляем это свойство для центрирования дочерних элементов по горизонтали */
-            align-items: flex-start; /* Добавляем это свойство для позиционирования дочерних элементов в начале родительского элемента по вертикали */
+            justify-content: center;
+            align-items: flex-start; 
             height: 100vh;
         }
         .fixed-top-wrapper {
@@ -59,11 +59,11 @@
 /* Fixed left block */
         .fixed-left-wrapper {
             position: fixed;
-            top: 70px; /* Это значение устанавливается на основе высоты вашего .fixed-top-wrapper */
+            top: 70px; 
             left: 0;
             bottom: 0;
-            width: 20%; /* Задайте ширину, которая вам подходит */
-            overflow-y: auto; /* Это позволит содержимому блока прокручиваться, если оно не умещается */
+            width: 20%; 
+            overflow-y: auto; 
         }
         .rounded-avatar {
             width: 50px;
@@ -117,9 +117,9 @@
             margin-right: 15px;
         }
         .content-wrapper {
-            position: absolute; /* Абсолютное позиционирование */
-            left: 50%; /* Центрирование блока относительно экрана */
-            transform: translateX(-50%); /* Дополнительное смещение для точного центрирования */
+            position: absolute; 
+            left: 50%; 
+            transform: translateX(-50%); 
             width: auto; 
             max-width: 750px; 
             padding: 40px;
@@ -167,17 +167,17 @@
         }
         .social-action-btn {
             display: inline-block;
-            margin: 5px 30px; /* Увеличенный отступ слева и справа */
+            margin: 5px 30px; 
             color: #333;
             text-decoration: none;
             font-size: 1em;
-            padding: 5px 10px; /* Добавьте немного отступа */
+            padding: 5px 10px; 
         }
         .social-action-btn i {
             margin-right: 10px;
         }
         .social-action-btn:hover {
-            color: #b17939; /* Измените цвет при наведении */
+            color: #b17939; 
         }
         .social-buttons-container {
             text-align: center;
@@ -198,28 +198,27 @@
             margin-right: auto;
         }
         .no-style {
-            text-decoration: none; /* убирает подчеркивание */
-            color: black; /* устанавливает цвет текста в черный или любой другой цвет, который вы хотите */
+            text-decoration: none; 
+            color: black; 
           }
 /*########## PAGE CONTENT */
 
 /* ##############   CSS COMMENT SECTION    ##############*/ 
         .comments-container {
             display: none;
-            margin-top: 10px; /* Вы можете изменить значение на желаемый размер отступа */
+            margin-top: 10px; 
         }
         .comments-container > *:not(:first-child) {
-            margin-top: 10px; /* Вы можете изменить значение на желаемый размер отступа */
-        
+            margin-top: 10px; 
         }
         /* */
         .comment-row {
             display: flex;
-            align-items: center; /* Выравнивание по центру */
+            align-items: center; 
         }
         .edit-comment-row {
             display: flex;
-            align-items: center; /* Выравнивание по центру */
+            align-items: center; 
             background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
@@ -229,41 +228,39 @@
             background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            flex-grow: 1; /* Форма занимает оставшееся пространство */
+            flex-grow: 1; 
             display: flex;
-            align-items: center; /* Выравнивание элементов формы по центру */
-            justify-content: space-between; /* Равномерное распределение пространства между элементами */
+            align-items: center; 
+            justify-content: space-between; 
             border-radius: 20px; 
         }
         .comment-form .form-input-row {
             display: flex;
-            align-items: center; /* Выравнивание элементов по центру */
+            align-items: center; 
             width: 100%;
         }
         .edit-comment-form .form-input-row {
             display: flex;
-            align-items: center; /* Выравнивание элементов по центру */
-            width: 100%; /* Убедитесь, что контейнер занимает всю ширину */
+            align-items: center; 
+            width: 100%; 
         }
         .comment-form textarea {
             width: 100%;
             padding: 10px;
             resize: none;
-            flex-grow: 1; /* Занимает все доступное пространство */
-            margin: 10px; /* Добавьте отступы между элементами */
+            flex-grow: 1; 
+            margin: 10px; 
             border: 0px;
-            font-family: inherit; /* Наследует шрифт от родительского элемента */
+            font-family: inherit; 
         }
         .edit-comment-form .form-input-row textarea {
-            flex-grow: 1; /* Элемент textarea занимает все доступное пространство */
-            margin-right: 10px; /* Добавляет отступ между textarea и кнопками */
-            
-            /* Другие стили для textarea... */
+            flex-grow: 1; 
+            margin-right: 10px; 
         }
         .comment-form textarea:focus {
-            outline: none; /* Убирает стандартную обводку */
-            border: 1px solid transparent; /* Можно установить прозрачную границу */
-            /* Другие стили по желанию */
+            outline: none; 
+            border: 1px solid transparent; 
+            
         }
         .comment-form button {
             background-color: #C19A6B;
@@ -273,7 +270,7 @@
             border-radius: 10px;
             cursor: pointer;
             margin-right: 15px;
-            font-weight: bold; /* Жирный шрифт */
+            font-weight: bold; 
         }
         .comment-form button:hover {
             background-color: #E6BF83;
@@ -284,26 +281,25 @@
             background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            flex-grow: 1; /* Форма занимает оставшееся пространство */
+            flex-grow: 1; 
             display: flex;
-            justify-content: space-between; /* Равномерное распределение пространства между элементами */
+            justify-content: space-between; 
             border-radius: 20px;
-            align-items: center; /* Выравнивание по вертикали */
+            align-items: center; 
             padding: 10px;
         }
         .edit-comment-form textarea {
             width: 100%;
             padding: 10px;
             resize: none;
-            flex-grow: 1; /* Занимает все доступное пространство */
-            margin-right: 10px; /* Добавьте отступы между элементами */
+            flex-grow: 1; 
+            margin-right: 10px; 
             border: 0px;
-            font-family: inherit; /* Наследует шрифт от родительского элемента */  
+            font-family: inherit; 
         }
         .edit-comment-form textarea:focus {
-            outline: none; /* Убирает стандартную обводку */
-            border: 1px solid transparent; /* Можно установить прозрачную границу */
-            /* Другие стили по желанию */
+            outline: none; 
+            border: 1px solid transparent; 
         }
         .edit-comment-form button {
             background-color: #C19A6B;
@@ -313,7 +309,7 @@
             border-radius: 10px;
             cursor: pointer;
             margin-left: 5px;
-            font-weight: bold; /* Жирный шрифт */
+            font-weight: bold; 
         }
         .edit-comment-form button:hover {
             background-color: #E6BF83;
@@ -329,7 +325,7 @@
         .comment {
             display: flex;
             margin-bottom: 10px;
-            border-radius: 20px; /* Значение округления углов */
+            border-radius: 20px; 
         }
         .comment-avatar img {
             width: 30px;
@@ -344,20 +340,19 @@
             background-color: rgba(255, 255, 255, 0.9);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 20px; /* Значение округления углов */
-            min-width: 40%; /* Минимальная ширина относительно родительского элемента */ 
+            border-radius: 20px; 
+            min-width: 40%; 
             word-break: break-all;
         }
         .comment-author {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%; /* Убедитесь, что элемент занимает всю ширину */
+            width: 100%;
             font-weight: bold;
             margin-top:10px;
             margin-left: 10px;
             font-size: 14px;
-            /* Другие необходимые стили */
         }
         .comment-actions {
             margin-right: 20px;
@@ -382,7 +377,6 @@
             text-align: right;
             margin-right: 10px;
             margin-top:5px;
-            /* Другие стили по желанию */
         }
 
        
@@ -392,7 +386,7 @@
          .like-button {
 
             display: inline-block;
-            margin-left: 10px; /* Увеличенный отступ слева и справа */
+            margin-left: 10px;
             color: #333;
             text-decoration: none;
             font-size: 1em;
@@ -401,7 +395,7 @@
         .comment-footer {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Распределение элементов по разным сторонам */
+            justify-content: space-between; 
             align-content: center;
              
         }
@@ -410,7 +404,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 15px; 
-            position: relative; /* Необходимо для позиционирования likers-list */ 
+            position: relative; 
         }
         
         .like-button i {
@@ -418,20 +412,20 @@
         }
         
         .like-button:hover {
-            color: #b17939; /* Измените цвет при наведении */
+            color: #b17939;
         }
         .likers-list {
             display: none;
-            position: absolute; /* Позиционирование поверх других элементов */
-            background-color: #E6BF83; /* Цвет фона */
-            border: 1px solid #ddd; /* Граница вокруг списка */
-            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Тень для эффекта "выплывающего" элемента */
-            padding: 10px; /* Внутренний отступ */
-            border-radius: 10px; /* Скругление углов */
-            z-index: 1000; /* Убедитесь, что z-index достаточно высок, чтобы быть поверх других элементов */
-            max-height: 200px; /* Максимальная высота списка */
-            overflow-y: auto; /* Полоса прокрутки, если содержимое списка выходит за максимальную высоту */
-            white-space: nowrap; /* Убедитесь, что имена пользователей не переносятся на новую строку */
+            position: absolute; 
+            background-color: #E6BF83; 
+            border: 1px solid #ddd; 
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); 
+            padding: 10px; 
+            border-radius: 10px; 
+            z-index: 1000; 
+            max-height: 200px; 
+            overflow-y: auto; 
+            white-space: nowrap; 
             text-align: left;
             margin-left:45px;
         }
@@ -440,10 +434,9 @@
             display: block;
         }
         
-        /* Дополнительные стили для элементов внутри списка, если необходимо */
         .likers-list span {
-            display: block; /* Каждое имя будет в своей строке */
-            margin-bottom: 5px; /* Отступ между именами */
+            display: block; 
+            margin-bottom: 5px; 
             font-size: 12px;
         }
     
@@ -451,24 +444,24 @@
 /* ##############   CSS MODAL COMMENT DELETE    ##############*/
 
         .modal {
-            position: fixed; /* Фиксированное позиционирование относительно вьюпорта */
+            position: fixed; 
             top: 50% !important;
             left: 50% !important;
-            transform: translate(-50%, -50%); /* Смещение для центрирования */
-            z-index: 1002; /* Больше, чем у .modal-backdrop */
-            display: none; /* Скрыто по умолчанию */
-            width: 30%; /* или другое фиксированное значение */  
+            transform: translate(-50%, -50%); 
+            z-index: 1002; 
+            display: none; 
+            width: 30%; 
         }
         .modal-content {
             background-color: #fefefe;
-            margin: 0; /* Убраны отступы */
+            margin: 0; 
             padding: 20px;
             border: 1px solid #888;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 20px; /* Значение округления углов */
+            border-radius: 20px; 
             font-size: 18px;
-            font-weight: bold; /* Жирный шрифт */
+            font-weight: bold;
             
         }
         .modal-button {
@@ -478,38 +471,37 @@
             padding: 10px 20px;
             border-radius: 10px;
             cursor: pointer;
-            margin: 10px 5px; /* Немного отступа между кнопками */
-            width: 100px; /* Фиксированная ширина кнопки */
-            font-weight: bold; /* Жирный шрифт */
+            margin: 10px 5px; 
+            width: 100px; 
+            font-weight: bold; 
         }
         .modal-button:hover {
             background-color: #E6BF83;
         }
         .modal-overlay {
-            position: fixed; /* Фиксированное позиционирование на всю страницу */
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(193, 154, 107, 0.2); /* Полупрозрачный (0, 0, 0, 0.5) */
-            z-index: 1001; /* Убедитесь, что это значение меньше, чем у вашего модального окна */
-            display: none; /* Скрыто по умолчанию */
+            background-color: rgba(193, 154, 107, 0.2); 
+            z-index: 1001; 
+            display: none; 
         }
 
 
         .likers-list-popup {
             display: none;
-            position: absolute; /* Позиционирование поверх других элементов */
-            background-color: #E6BF83; /* Цвет фона */
-            border: 1px solid #ddd; /* Граница вокруг списка */
-            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Тень для эффекта "выплывающего" элемента */
-            padding: 10px; /* Внутренний отступ */
-            border-radius: 10px; /* Скругление углов */
-            z-index: 1000; /* Убедитесь, что z-index достаточно высок, чтобы быть поверх других элементов */
-            max-height: 200px; /* Максимальная высота списка */
-            overflow-y: auto; /* Полоса прокрутки, если содержимое списка выходит за максимальную высоту */
-            white-space: nowrap; /* Убедитесь, что имена пользователей не переносятся на новую строку */
-            text-align: left;
+            position: absolute; 
+            background-color: #E6BF83; 
+            border: 1px solid #ddd; 
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); 
+            padding: 10px; 
+            border-radius: 10px; 
+            z-index: 1000; 
+            max-height: 200px; 
+            overflow-y: auto; 
+            white-space: nowrap; 
             
            
         }
@@ -562,7 +554,6 @@
             {% for post in posts %}
                 <div id="post-{{ post.id }}" class="post" style="border: 1px solid #ccc; padding: 15px; margin: 20px 0; background-color: #f5f5f5; border-radius: 15px;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                        <!-- Левая часть (Аватар и имя) -->
                         <div style="display: flex; align-items: center; ">
                             {% if post.author.avatar %}
                                 <div class="rounded-avatar" style="margin-left: 5px;">
@@ -576,14 +567,11 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Правая часть (Кнопки Edit и Delete) -->
                         <div style="display: flex; align-items: center;">
                             {% if post.author == user %}
-                                <!-- Кнопка Edit -->
                                 <a href="{% url 'edit_post' post.id %}" style="margin-right: 10px; font-size: 18px;" title="Edit">
                                     <i class="fas fa-pencil" style="color: #949d9e;"></i>
                                 </a>
-                                <!-- Кнопка Delete -->
                                 <form action="{% url 'delete_post' post.id %}" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');" style="margin: 0;">
                                     {% csrf_token %}
                                     <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer; font-size: 25px;">
@@ -592,7 +580,7 @@
                                 </form>
                             {% endif %}
                         </div>
-                        <!-- Правая часть (Кнопка Скрыть для не-авторов) -->
+                    
                         {% if post.author != user %}
                             <form action="{% url 'hide_post' post.id %}" method="post" style="display: inline; ">
                                 {% csrf_token %}
@@ -625,10 +613,7 @@
                         <source src="{{ post.video_url }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                {% endif %}
-                    <!-- Кнопки Like, Comment, Share -->
-                  
-                    
+                {% endif %}  
                     
                     <div class="social-buttons-container">
                         <a href="#" class="social-action-btn post-like-button" data-post-id="{{ post.id }}" title="Like">
@@ -691,24 +676,22 @@
                 form.addEventListener('submit', function (e) {
                     e.preventDefault();
                     const postId = this.dataset.postId;
-                
                     const textarea = this.querySelector('textarea[name="text"]');
                     if (textarea) {
                         const text = textarea.value;
-                        // остальная логика
                     } else {
                         console.error('Textarea not found');
                     }
                     const text = this.querySelector('textarea[name="text"]').value;
 
 
-                    const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); // Получаем CSRF-токен
-                    console.log("Отправка комментария:", text); // Логирование отправляемого текста
+                    const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); 
+                    console.log("Отправка комментария:", text); 
                     fetch(`/create-comment/${postId}/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRFToken': csrfToken // Используем CSRF-токен
+                            'X-CSRFToken': csrfToken 
                         },
                         body: JSON.stringify({ text: text })
                     })
@@ -723,18 +706,14 @@
                     .catch(error => console.error('Error:', error));
                 });
             });
-            
-            // Обработчик нажатия на кнопку Comment
+
             document.querySelectorAll('.comment-toggle').forEach(button => {
                 button.addEventListener('click', function (e) {
                     e.preventDefault();
                     const postId = this.dataset.postId;
                     const commentsContainer = document.getElementById(`comments-container-${postId}`);
-            
-                    // Проверяем, загружены ли комментарии
                     const areCommentsLoaded = commentsContainer.getAttribute('data-comments-loaded') === 'true';
             
-                    // Если комментарии еще не загружены
                     if (!areCommentsLoaded) {
                         fetch(`/load-comments/?post_id=${postId}`)
                             .then(response => response.json())
@@ -742,12 +721,10 @@
                                 comments.forEach(comment => {
                                     addCommentToPage(comment, postId);
                                 });
-                                // Обновляем атрибут, указывая, что комментарии загружены
                                 commentsContainer.setAttribute('data-comments-loaded', 'true');
                             })
                             .catch(error => console.error('Error loading comments:', error));
                     }
-                    // Переключаем видимость комментариев и формы
                     const isDisplayed = commentsContainer.style.display === 'block';
                     commentsContainer.style.display = isDisplayed ? 'none' : 'block';
                     const commentForm = document.getElementById(`comment-form-${postId}`);
@@ -759,7 +736,7 @@
 
 // #####################  Post Like    ############################ 
         document.addEventListener('click', function(e) {
-            // Лайк поста
+
             const postButton = e.target.closest('.post-like-button');
             if (postButton) {
                 e.preventDefault();
@@ -817,10 +794,8 @@
 
             button.classList.toggle('liked', isLiked);
 
-            // Используем обновленную функцию для привязки событий к кнопке
             bindMouseEventsToLikeButton(button);
         }
-
 
         function bindMouseEventsToLikeButton(likeButton) {
             likeButton.addEventListener('mouseenter', function() {
@@ -835,10 +810,9 @@
         }
 
 
-        likersData = {}; // Глобальный объект для хранения данных о лайкнувших
+        likersData = {};
 
         function updateLikersList(postId, likersInfo) {
-            // Обновляем данные о лайкнувших для данного поста
             likersData[postId] = likersInfo;
         }
 
@@ -850,7 +824,7 @@
             fetch(`/get-likers/${postId}/`)
                 .then(response => response.json())
                 .then(data => {
-                    // Проверяем, есть ли лайкнувшие пользователи
+                   
                     if (data.likers && data.likers.length > 0) {
                         
                         if (!likersList) {
@@ -860,7 +834,7 @@
                                 hideLikersList(postId);
                             });
                         } else {
-                            // Обновляем существующий список лайкнувших
+
                             updateLikersListInDOM(likersList, data.likers);
                         }
                         positionLikersList(likersList, likeButton);
@@ -871,7 +845,7 @@
         }
 
         function updateLikersListInDOM(likersListElement, likers) {
-            likersListElement.innerHTML = ''; // Очищаем существующий список
+            likersListElement.innerHTML = ''; 
             likers.forEach(liker => {
                 const likerElement = document.createElement('div');
                 likerElement.textContent = `${liker.last_name} ${liker.first_name}`;
@@ -883,10 +857,9 @@
         function positionLikersList(likersList, targetElement) {
             const rect = targetElement.getBoundingClientRect();
             likersList.style.position = 'absolute';
-            likersList.style.top = `${rect.bottom + window.scrollY - 25}px`; // Поднимаем список на 10px вверх
-            likersList.style.left = `${rect.left + window.scrollX + 100}px`; // Ваш текущий margin-left
+            likersList.style.top = `${rect.bottom + window.scrollY - 25}px`;
+            likersList.style.left = `${rect.left + window.scrollX + 100}px`; 
         }
-
 
 
         function hideLikersList(postId) {
@@ -894,23 +867,14 @@
             if (likersList) {
                 likersList.style.display = 'none';
             }
-        }
-
-
-
-
-// @@@@@@@@@@@@@@@eeeeeeeeeeewwwwwww@@@@@@@@@@@@@@@@@git
+        }git remote add origin
 
 // #####################  Post Like    ############################@@@
 
 
 // #####################  Comment Like    ############################ 
         document.addEventListener('click', function(e) {
-             // Это предотвращает стандартное действие ссылки
-            // Используем метод closest для поиска ближайшего родителя с классом .like-button
             const button = e.target.closest('.like-button');
-        
-            // Проверяем, найден ли элемент .like-button
             if (button) {
                 e.preventDefault();
                 const commentId = button.dataset.commentId;
@@ -922,20 +886,18 @@
             const likeCountElement = button.nextElementSibling;
         
             if (likesCount > 0) {
-                likeCountElement.style.display = ''; // Показать счетчик
+                likeCountElement.style.display = ''; 
                 likeCountElement.textContent = likesCount;
             } else {
-                likeCountElement.style.display = 'none'; // Скрыть счетчик
+                likeCountElement.style.display = 'none';
             }
-        
-            // Обновить стиль кнопки в зависимости от того, поставлен ли лайк
+
             if (isLiked) {
                 button.classList.add('liked');
             } else {
                 button.classList.remove('liked');
             }
-        
-            // Обновляем список лайкнувших
+
             const commentId = button.dataset.commentId;
             updateLikersList(commentId, likersInfo);
             
@@ -947,10 +909,8 @@
                 if (likersInfo.length > 0) {
                     const likersHtml = likersInfo.map(liker => `<span>${liker.first_name} ${liker.last_name}</span>`).join('');
                     likersListElement.innerHTML = likersHtml;
-                    // Удаляем инлайновый стиль, если лайкнувшие есть
                     likersListElement.style.display = '';
                 } else {
-                    // Прячем список, если лайкнувших нет
                     likersListElement.style.display = 'none';
                 }
             }
@@ -963,7 +923,7 @@
             console.log(`Is currently liked: ${isLiked}`);
         
             const likeCountElement = button.nextElementSibling;
-            const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); // Получаем CSRF-токен
+            const csrfToken = $('input[name=csrfmiddlewaretoken]').val();
         
             const url = isLiked ? `/remove-like/${commentId}/` : `/add-like/${commentId}/`;
             console.log(`Making request to URL: ${url}`);
@@ -983,13 +943,12 @@
                 console.log('Response data:', data);
                 if (data.status === 'success') {
                     const likesCount = data.likes_count;
-                    const likersInfo = data.likers_info || []; // Используем пустой массив, если данных нет
+                    const likersInfo = data.likers_info || []; 
                     console.log(`Updated likes count: ${likesCount}`);
                     likeCountElement.textContent = likesCount;
                     likeCountElement.style.display = likesCount > 0 ? '' : 'none';
                     button.classList.toggle('liked', !isLiked);
 
-                    // Обновляем список лайкнувших
                     updateLikersList(commentId, likersInfo);
                     updateLikeStatus(button, data.likes_count, !isLiked, data.likers_info);
                     
@@ -1051,15 +1010,13 @@
                 </div>
             </div>
         `;
-        
-            // Если у пользователя есть право удалить комментарий, добавляем обработчик
+
             if (comment.can_delete) {
                 const deleteIcon = commentElement.querySelector('.fa-xmark');
                 deleteIcon.addEventListener('click', function() {
                     deleteComment(comment.id, postId);
                 });
             }
-            // Если у пользователя есть право редактировать комментарий, добавляем обработчик
             if (comment.can_edit) {
                 const editIcon = commentElement.querySelector('.fa-pencil');
                 editIcon.addEventListener('click', function() {
@@ -1073,27 +1030,22 @@
         }
 
 
-
 // #####################   DELETE COMMENT     #################
         function deleteComment(commentId, postId) {
             const modal = document.getElementById("confirmModal");
             const overlay = document.getElementById('modalOverlay');
             const commentElement = document.getElementById(`comment-${commentId}`);
             const commentRect = commentElement.getBoundingClientRect();
-            
-            // Вычисление позиции модального окна
-            // Например, чтобы показать его под комментарием
+
             modal.style.top = (window.scrollY + commentRect.bottom) + 'px';
             modal.style.left = commentRect.left + 'px';
-            
-            // Показать модальное окно
-            toggleModal(true); // Вместо modal.style.display = "block";
+
+            toggleModal(true); 
         
-            const confirmBtn = document.getElementById("confirmDelete"); // Определение confirmBtn
-            
-            confirmBtn.onclick = null; // Удаляем предыдущий обработчик, если он есть
+            const confirmBtn = document.getElementById("confirmDelete"); 
+            confirmBtn.onclick = null; 
             confirmBtn.onclick = function(event) {
-                event.stopPropagation(); // Предотвращаем всплытие события
+                event.stopPropagation(); 
                 modal.style.display = "none";
                 performDelete(commentId, postId);
             };
@@ -1101,17 +1053,15 @@
         }
         
         function performDelete(commentId, postId) {
-            const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); // Получаем CSRF-токен
-        
+            const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); 
             fetch(`/delete-comment/${commentId}/${postId}/`, {
                 method: 'POST',
                 headers: {
-                    'X-CSRFToken': csrfToken // Используем CSRF-токен
+                    'X-CSRFToken': csrfToken
                 }
             })
             .then(response => {
                 if(response.ok) {
-                    // Удаляем элемент комментария из DOM
                     const commentElement = document.getElementById(`comment-${commentId}`);
                     commentElement.remove();
                 } else {
@@ -1125,21 +1075,19 @@
             const modal = document.getElementById('confirmModal');
             const overlay = document.getElementById('modalOverlay');
         
-            console.log("toggleModal вызвана с show = " + show); // Для отладки
+            console.log("toggleModal вызвана с show = " + show);
         
             if (show) {
-                modal.style.display = 'flex'; // Показываем модальное окно
-                overlay.style.display = 'block'; // Показываем затемняющий фон
+                modal.style.display = 'flex';
+                overlay.style.display = 'block';
                 console.log("Затемняющий фон должен быть виден");
             } else {
-                modal.style.display = 'none'; // Скрываем модальное окно
-                overlay.style.display = 'none'; // Скрываем затемняющий фон
+                modal.style.display = 'none'; 
+                overlay.style.display = 'none'; 
                 console.log("Затемняющий фон должен быть скрыт");
             }
         }
         
-        
-        // Привязка к кнопкам "Удалить" и "Отмена"
         document.getElementById('confirmDelete').addEventListener('click', () => toggleModal(false));
         document.getElementById('cancelDelete').addEventListener('click', () => toggleModal(false));
         
@@ -1151,14 +1099,13 @@
             $('#comment-row').hide();
             console.log("Открытие формы редактирования для комментария:", commentId);
             if ($(`#edit-comment-row-${commentId}`).length === 0) {
-                const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); // Получаем CSRF-токен
-                const editCommentForm = $('#edit-comment-form'); // Объявляем editCommentForm здесь
+                const csrfToken = $('input[name=csrfmiddlewaretoken]').val(); 
+                const editCommentForm = $('#edit-comment-form'); 
                 editCommentForm.find('textarea[name="edit-text"]').val(originalText);
                 editCommentForm.attr('data-commentId', commentId);
                 editCommentForm.attr('data-postId', postId);
                 console.log("openEditForm: commentId =", commentId, ", postId =", postId);
-            
-                // HTML-разметка для формы редактирования комментария
+
                 const editCommentRowHtml = `
                     <div id="edit-comment-row-${commentId}" class="comment-row">
                         <div class="comment-avatar">
@@ -1176,16 +1123,14 @@
                         </form>
                     </div>`;
             
-            // Добавляем форму редактирования после комментария, который редактируется
                 $(`#comment-${commentId}`).after(editCommentRowHtml);
             }
             $(`#edit-comment-row-${commentId} textarea[name="edit-text"]`).val(originalText);
             $('#edit-comment-form').show();
         
-            // Обработчик события для кнопки отмены редактирования
             $(document).on('click', '#cancel-edit', function(event) {
                 $(`#edit-comment-row-${commentId}`).remove();
-                $('#comment-row').show(); // Показываем оригинальные формы комментариев
+                $('#comment-row').show(); 
             });
         }
         
@@ -1209,7 +1154,6 @@
             const commentText = editCommentForm.find('textarea[name="edit-text"]').val();
             const csrfToken = editCommentForm.find('input[name=csrfmiddlewaretoken]').val();
         
-            // Отправляем отредактированный комментарий на сервер
             fetch(`/edit-comment/${commentId}/${postId}/`, {
                 method: 'POST',
                 headers: {
@@ -1225,15 +1169,12 @@
             .then(data => {
                 console.log("Данные ответа", data);
                 if (data.success && data.comment) {
-                    // Проверяем, что ID комментария не изменился
                     if (data.comment.id === parseInt(commentId, 10)) {
-                        // Обновляем существующий комментарий
                         const existingComment = document.getElementById(`comment-${commentId}`);
                         if (existingComment) {
                             const commentTextElement = existingComment.querySelector('.comment-text');
                             commentTextElement.textContent = data.comment.text;
                 
-                            // Логируем информацию перед проверкой маркера "Edited"
                             console.log("Статус отредактированности комментария:", data.comment.is_edited);
                             let editedMarker = existingComment.querySelector('.edited-marker');
                             console.log("Текущее состояние маркера 'Edited' в DOM:", editedMarker);
